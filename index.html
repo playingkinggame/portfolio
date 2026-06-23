@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>A Yathin Kumar — AI/ML Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -36,6 +36,12 @@ body {
   cursor: none;
   overflow: hidden;
   width: 100vw; height: 100vh;
+}
+
+/* Hide custom cursor on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  body { cursor: auto; }
+  #cur { display: none !important; }
 }
 
 /* ============================================================
@@ -91,13 +97,7 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
   transform: scale(1.06);
   pointer-events: none;
 }
-
-/* 3D canvas for splash */
-#splashCanvas {
-  position: absolute; inset: 0; z-index: 0;
-}
-
-/* Splash grid overlay */
+#splashCanvas { position: absolute; inset: 0; z-index: 0; }
 .splash-grid {
   position: absolute; inset: 0; z-index: 1;
   background-image:
@@ -106,33 +106,19 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
   background-size: 60px 60px;
   animation: gridPulse 4s ease-in-out infinite;
 }
-@keyframes gridPulse {
-  0%,100% { opacity: .5; }
-  50% { opacity: 1; }
-}
-
-/* Radial glow center */
+@keyframes gridPulse { 0%,100%{opacity:.5} 50%{opacity:1} }
 .splash-glow {
   position: absolute; inset: 0; z-index: 2; pointer-events: none;
-  background: radial-gradient(ellipse 60% 60% at 50% 50%,
-    rgba(0,229,200,.08) 0%,
-    rgba(124,92,252,.06) 40%,
-    transparent 70%);
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(0,229,200,.08) 0%, rgba(124,92,252,.06) 40%, transparent 70%);
   animation: glowPulse 3s ease-in-out infinite;
 }
-@keyframes glowPulse {
-  0%,100% { transform: scale(1); opacity: .8; }
-  50% { transform: scale(1.15); opacity: 1; }
-}
-
-/* Splash content */
+@keyframes glowPulse { 0%,100%{transform:scale(1);opacity:.8} 50%{transform:scale(1.15);opacity:1} }
 .splash-content {
   position: relative; z-index: 10;
   text-align: center;
   display: flex; flex-direction: column; align-items: center;
+  padding: 0 1.5rem;
 }
-
-/* Glitch eyebrow */
 .splash-eyebrow {
   font-family: 'Space Mono', monospace;
   font-size: .65rem; letter-spacing: 8px; text-transform: uppercase;
@@ -148,44 +134,23 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
   background: linear-gradient(90deg, transparent, var(--accent));
 }
 .splash-eyebrow::after { background: linear-gradient(90deg, var(--accent), transparent); }
-
-/* Big 3D title */
 .splash-title {
   font-family: 'Orbitron', sans-serif;
   font-weight: 900;
-  font-size: clamp(3rem, 9vw, 8rem);
+  font-size: clamp(2.2rem, 9vw, 8rem);
   line-height: .95;
   letter-spacing: -2px;
   margin-bottom: 1.5rem;
   perspective: 800px;
 }
-.splash-title .word {
-  display: block;
-  opacity: 0;
-  transform: rotateX(-90deg) translateY(40px);
-  animation: flipIn .9s ease forwards;
-  transform-origin: top center;
-}
+.splash-title .word { display: block; opacity: 0; transform: rotateX(-90deg) translateY(40px); animation: flipIn .9s ease forwards; transform-origin: top center; }
 .splash-title .word-1 { color: #fff; animation-delay: .6s; }
-.splash-title .word-2 {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--a2) 50%, var(--a3) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation-delay: .85s;
-  position: relative;
-}
-.splash-title .word-3 { color: rgba(255,255,255,.15); font-size: .35em; letter-spacing: 14px; animation-delay: 1.05s; -webkit-text-fill-color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.2); }
-
-@keyframes flipIn {
-  0% { opacity: 0; transform: rotateX(-90deg) translateY(40px); }
-  60% { opacity: 1; transform: rotateX(8deg) translateY(-5px); }
-  100% { opacity: 1; transform: rotateX(0deg) translateY(0); }
-}
-
-/* Subtitle typewriter */
+.splash-title .word-2 { background: linear-gradient(135deg, var(--accent) 0%, var(--a2) 50%, var(--a3) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation-delay: .85s; }
+.splash-title .word-3 { color: rgba(255,255,255,.15); font-size: .35em; letter-spacing: 10px; animation-delay: 1.05s; -webkit-text-fill-color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.2); }
+@keyframes flipIn { 0%{opacity:0;transform:rotateX(-90deg) translateY(40px)} 60%{opacity:1;transform:rotateX(8deg) translateY(-5px)} 100%{opacity:1;transform:rotateX(0deg) translateY(0)} }
 .splash-sub {
   font-family: 'Space Mono', monospace;
-  font-size: clamp(.65rem, 1.2vw, .9rem);
+  font-size: clamp(.6rem, 1.2vw, .9rem);
   letter-spacing: 3px;
   color: var(--muted);
   text-transform: uppercase;
@@ -194,42 +159,11 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
   animation: fadeSlideUp .8s 1.3s ease forwards;
   min-height: 1.5em;
 }
-.splash-sub .typed { color: var(--a5); }
-
-/* Corner decorations */
-.splash-corner {
-  position: absolute; width: 60px; height: 60px;
-  border-color: rgba(0,229,200,.3);
-  border-style: solid;
-  opacity: 0;
-  animation: fadeIn .6s 1.6s ease forwards;
-}
-.splash-corner.tl { top: 40px; left: 40px; border-width: 2px 0 0 2px; }
-.splash-corner.tr { top: 40px; right: 40px; border-width: 2px 2px 0 0; }
-.splash-corner.bl { bottom: 40px; left: 40px; border-width: 0 0 2px 2px; }
-.splash-corner.br { bottom: 40px; right: 40px; border-width: 0 2px 2px 0; }
-
-/* Floating cubes */
-.cube-container {
-  position: absolute; z-index: 5;
-  animation: floatCube linear infinite;
-}
-@keyframes floatCube {
-  0% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-25px) rotate(180deg); }
-  100% { transform: translateY(0) rotate(360deg); }
-}
-
-/* Orbiting ring */
-.splash-ring {
-  position: absolute; z-index: 4;
-  border-radius: 50%;
-  border: 1px solid;
-  animation: spinRing linear infinite;
-}
-@keyframes spinRing { to { transform: rotate(360deg); } }
-
-/* Enter button */
+.splash-corner { position: absolute; width: 40px; height: 40px; border-color: rgba(0,229,200,.3); border-style: solid; opacity: 0; animation: fadeIn .6s 1.6s ease forwards; }
+.splash-corner.tl { top: 20px; left: 20px; border-width: 2px 0 0 2px; }
+.splash-corner.tr { top: 20px; right: 20px; border-width: 2px 2px 0 0; }
+.splash-corner.bl { bottom: 20px; left: 20px; border-width: 0 0 2px 2px; }
+.splash-corner.br { bottom: 20px; right: 20px; border-width: 0 2px 2px 0; }
 .splash-enter {
   position: relative;
   font-family: 'Space Mono', monospace;
@@ -244,93 +178,31 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
   animation: fadeSlideUp .8s 1.6s ease forwards;
   transition: color .3s, box-shadow .3s;
 }
-.splash-enter::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(135deg, var(--accent), var(--a2));
-  transform: translateX(-100%) skewX(-10deg);
-  transition: transform .4s cubic-bezier(.25,.46,.45,.94);
-}
+.splash-enter::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--accent), var(--a2)); transform: translateX(-100%) skewX(-10deg); transition: transform .4s cubic-bezier(.25,.46,.45,.94); }
 .splash-enter:hover::before { transform: translateX(0) skewX(-10deg); }
 .splash-enter:hover { color: #000; box-shadow: 0 0 40px rgba(0,229,200,.3); }
 .splash-enter span { position: relative; z-index: 1; }
 .splash-enter .arrow { display: inline-block; transition: transform .3s; }
 .splash-enter:hover .arrow { transform: translateX(8px); }
-
-/* Loading bar */
-.splash-loader {
-  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-  background: rgba(255,255,255,.05);
-}
-.splash-loader-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--a2), var(--accent), var(--a3));
-  width: 0%;
-  animation: loadFill 2s .2s cubic-bezier(.25,.46,.45,.94) forwards;
-}
+.splash-loader { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: rgba(255,255,255,.05); }
+.splash-loader-fill { height: 100%; background: linear-gradient(90deg, var(--a2), var(--accent), var(--a3)); width: 0%; animation: loadFill 2s .2s cubic-bezier(.25,.46,.45,.94) forwards; }
 @keyframes loadFill { to { width: 100%; } }
-
-/* Status line */
-.splash-status {
-  position: absolute; bottom: 20px; left: 0; right: 0;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 0 40px;
-  font-family: 'Space Mono', monospace; font-size: .48rem;
-  letter-spacing: 2px; color: var(--muted); text-transform: uppercase;
-  opacity: 0; animation: fadeIn .6s 1.8s ease forwards;
-}
-.splash-status .status-dot {
-  width: 4px; height: 4px; background: var(--accent);
-  border-radius: 50%; display: inline-block; margin-right: .4rem;
-  animation: blink 1.8s ease-in-out infinite;
-}
-
-/* Horizontal scan line animation */
-.scan-beam {
-  position: absolute; z-index: 6; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0,229,200,.6), transparent);
-  animation: scanBeam 3s linear infinite;
-  opacity: 0; animation-delay: 2s;
-}
-@keyframes scanBeam {
-  0% { top: -2px; opacity: 0; }
-  5% { opacity: 1; }
-  95% { opacity: 1; }
-  100% { top: 100%; opacity: 0; }
-}
-
-/* Particle field */
-.particle {
-  position: absolute;
-  width: 2px; height: 2px;
-  border-radius: 50%;
-  background: var(--accent);
-  animation: particleDrift linear infinite;
-  pointer-events: none;
-}
-@keyframes particleDrift {
-  0% { transform: translateY(0) translateX(0); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: .6; }
-  100% { transform: translateY(-100vh) translateX(var(--drift)); opacity: 0; }
-}
+.splash-status { position: absolute; bottom: 20px; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-family: 'Space Mono', monospace; font-size: .44rem; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; opacity: 0; animation: fadeIn .6s 1.8s ease forwards; }
+.splash-status .status-dot { width: 4px; height: 4px; background: var(--accent); border-radius: 50%; display: inline-block; margin-right: .4rem; animation: blink 1.8s ease-in-out infinite; }
+.scan-beam { position: absolute; z-index: 6; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,229,200,.6), transparent); animation: scanBeam 3s linear infinite; opacity: 0; animation-delay: 2s; }
+@keyframes scanBeam { 0%{top:-2px;opacity:0} 5%{opacity:1} 95%{opacity:1} 100%{top:100%;opacity:0} }
 
 /* ============================================================
    COMMON ANIMATIONS
 ============================================================ */
-@keyframes fadeSlideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+@keyframes fadeSlideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
 @keyframes gro { to { transform: scaleX(1); } }
+@keyframes spin { to { transform: rotate(360deg); } }
 
 /* ============================================================
-   APP SHELL (hidden until splash exits)
+   APP SHELL
 ============================================================ */
 #app {
   position: fixed; inset: 0; z-index: 10;
@@ -358,41 +230,61 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
   color: var(--accent);
   display: flex; align-items: center; gap: .6rem;
 }
-.nav-brand .nb-dot {
-  width: 6px; height: 6px; background: var(--a2); border-radius: 50%;
-  animation: blink 2s ease-in-out infinite;
-}
-.nav-brand .nb-sub {
-  font-size: .48rem; letter-spacing: 2px; color: var(--muted);
-  font-family: 'Space Mono', monospace;
-  display: block; margin-top: .1rem;
-}
+.nav-brand .nb-dot { width: 6px; height: 6px; background: var(--a2); border-radius: 50%; animation: blink 2s ease-in-out infinite; }
+.nav-brand .nb-sub { font-size: .48rem; letter-spacing: 2px; color: var(--muted); font-family: 'Space Mono', monospace; display: block; margin-top: .1rem; }
 .tabs { display: flex; gap: .2rem; }
-.tb {
-  font-family: 'Space Mono', monospace;
-  font-size: .58rem; letter-spacing: 2.5px; text-transform: uppercase;
-  padding: .42rem 1.2rem; background: transparent; color: var(--muted);
-  border: 1px solid transparent; border-radius: 2px; cursor: pointer;
-  position: relative; overflow: hidden;
-  transition: color .22s, border-color .22s, background .22s;
-}
+.tb { font-family: 'Space Mono', monospace; font-size: .58rem; letter-spacing: 2.5px; text-transform: uppercase; padding: .42rem 1.2rem; background: transparent; color: var(--muted); border: 1px solid transparent; border-radius: 2px; cursor: pointer; position: relative; overflow: hidden; transition: color .22s, border-color .22s, background .22s; }
 .tb .tn { color: var(--a2); margin-right: .35rem; }
-.tb::before {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(0,229,200,.06), transparent);
-  opacity: 0; transition: opacity .22s;
-}
+.tb::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,229,200,.06), transparent); opacity: 0; transition: opacity .22s; }
 .tb:hover { color: var(--text); border-color: var(--border); }
 .tb:hover::before, .tb.act::before { opacity: 1; }
 .tb.act { color: var(--accent); border-color: rgba(0,229,200,.5); background: rgba(0,229,200,.05); }
 .tb.act::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: var(--accent); }
 .nav-r { display: flex; align-items: center; gap: 1.2rem; }
-.ns {
-  font-family: 'Space Mono', monospace; font-size: .55rem; letter-spacing: 2px;
-  color: var(--muted); display: flex; align-items: center; gap: .4rem;
-}
+.ns { font-family: 'Space Mono', monospace; font-size: .55rem; letter-spacing: 2px; color: var(--muted); display: flex; align-items: center; gap: .4rem; }
 .pd { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 7px var(--accent); animation: blink 1.8s ease-in-out infinite; }
 #clk { font-family: 'Space Mono', monospace; font-size: .58rem; color: var(--a5); letter-spacing: 1px; }
+
+/* Hamburger — hidden on desktop */
+#hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: .4rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+}
+#hamburger span { display: block; width: 20px; height: 1.5px; background: var(--accent); border-radius: 1px; transition: all .3s; }
+#hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+#hamburger.open span:nth-child(2) { opacity: 0; }
+#hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Mobile nav drawer */
+#mobileNav {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(2,4,12,.97);
+  backdrop-filter: blur(40px);
+  z-index: 199;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  padding: 5rem 2rem 2rem;
+  transform: translateX(-100%);
+  transition: transform .35s cubic-bezier(.25,.46,.45,.94);
+}
+#mobileNav.open { transform: translateX(0); }
+#mobileNav .tb {
+  width: 100%;
+  text-align: center;
+  padding: .9rem 2rem;
+  font-size: .7rem;
+  letter-spacing: 4px;
+}
 
 /* ============================================================
    PANELS
@@ -414,27 +306,12 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
 /* ============================================================
    SHARED COMPONENTS
 ============================================================ */
-.sec-lbl {
-  font-family: 'Space Mono', monospace; font-size: .5rem; letter-spacing: 4px;
-  color: var(--muted); text-transform: uppercase;
-  display: flex; align-items: center; gap: .7rem;
-}
+.sec-lbl { font-family: 'Space Mono', monospace; font-size: .5rem; letter-spacing: 4px; color: var(--muted); text-transform: uppercase; display: flex; align-items: center; gap: .7rem; }
 .sec-lbl::after { content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--border2); }
 .sec-h { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 900; line-height: 1; }
 .sec-h span { color: var(--accent); }
-.btn {
-  font-family: 'Space Mono', monospace; font-size: .62rem; letter-spacing: 2px;
-  padding: .62rem 1.5rem; border-radius: 2px; cursor: pointer;
-  text-transform: uppercase; border: none;
-  position: relative; overflow: hidden;
-  transition: transform .15s, box-shadow .15s;
-  display: inline-flex; align-items: center; gap: .5rem;
-}
-.btn::after {
-  content: ''; position: absolute; inset: 0;
-  background: rgba(255,255,255,.12);
-  transform: translateX(-100%); transition: transform .3s ease;
-}
+.btn { font-family: 'Space Mono', monospace; font-size: .62rem; letter-spacing: 2px; padding: .62rem 1.5rem; border-radius: 2px; cursor: pointer; text-transform: uppercase; border: none; position: relative; overflow: hidden; transition: transform .15s, box-shadow .15s; display: inline-flex; align-items: center; gap: .5rem; }
+.btn::after { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,.12); transform: translateX(-100%); transition: transform .3s ease; }
 .btn:hover::after { transform: translateX(0); }
 .btn:hover { transform: translateY(-2px); }
 .bc { background: var(--accent); color: var(--bg); box-shadow: 0 0 16px rgba(0,229,200,.25); }
@@ -445,22 +322,9 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
 .ba:hover { border-color: var(--a3); background: rgba(240,67,108,.06); }
 .b2 { background: transparent; color: var(--a2); border: 1px solid rgba(124,92,252,.25); }
 .b2:hover { background: rgba(124,92,252,.08); border-color: var(--a2); }
-.lbadge {
-  display: inline-flex; align-items: center; gap: .3rem;
-  font-family: 'Space Mono', monospace; font-size: .45rem; letter-spacing: 2px;
-  padding: .18rem .5rem; border: 1px solid rgba(245,166,35,.3);
-  color: var(--a4); border-radius: 1px; text-transform: uppercase;
-}
+.lbadge { display: inline-flex; align-items: center; gap: .3rem; font-family: 'Space Mono', monospace; font-size: .45rem; letter-spacing: 2px; padding: .18rem .5rem; border: 1px solid rgba(245,166,35,.3); color: var(--a4); border-radius: 1px; text-transform: uppercase; }
 .lbadge::before { content: ''; width: 4px; height: 4px; background: var(--a4); border-radius: 50%; animation: blink 1.5s ease-in-out infinite; }
-#toast {
-  position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 99999;
-  font-family: 'Space Mono', monospace; font-size: .58rem; letter-spacing: 2px;
-  padding: .6rem 1.2rem; background: rgba(0,229,200,.08);
-  border: 1px solid var(--accent); color: var(--accent);
-  border-radius: 2px; transform: translateY(70px); opacity: 0;
-  transition: transform .3s, opacity .3s; pointer-events: none;
-  text-transform: uppercase;
-}
+#toast { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 99999; font-family: 'Space Mono', monospace; font-size: .58rem; letter-spacing: 2px; padding: .6rem 1.2rem; background: rgba(0,229,200,.08); border: 1px solid var(--accent); color: var(--accent); border-radius: 2px; transform: translateY(70px); opacity: 0; transition: transform .3s, opacity .3s; pointer-events: none; text-transform: uppercase; }
 #toast.show { transform: translateY(0); opacity: 1; }
 .fi { opacity: 0; transform: translateY(14px); animation: fiA .55s ease forwards; }
 @keyframes fiA { to { opacity: 1; transform: translateY(0); } }
@@ -470,26 +334,12 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
    TAB 1 — HOME
 ============================================================ */
 #t1 { display: grid; grid-template-columns: 1fr 1fr; height: 100%; }
-.h-left {
-  display: flex; flex-direction: column; justify-content: center;
-  padding: 3rem 3.5rem 3rem 4rem;
-  border-right: 1px solid var(--border);
-  position: relative; overflow: hidden;
-}
-.h-left::before {
-  content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 2px;
-  background: linear-gradient(to bottom, transparent, var(--accent), var(--a2), transparent);
-}
-.h-left::after {
-  content: 'SYS_CORE: ONLINE\AMODEL: CSC_AIML_V1\ANODE: CHENNAI-IND\ASTATUS: BUILDING';
-  white-space: pre;
-  position: absolute; bottom: 1.5rem; left: 4rem;
-  font-family: 'Space Mono', monospace; font-size: .45rem; letter-spacing: 2px;
-  color: var(--muted); line-height: 1.9;
-}
+.h-left { display: flex; flex-direction: column; justify-content: center; padding: 3rem 3.5rem 3rem 4rem; border-right: 1px solid var(--border); position: relative; overflow: hidden; }
+.h-left::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, transparent, var(--accent), var(--a2), transparent); }
+.h-left::after { content: 'SYS_CORE: ONLINE\AMODEL: CSC_AIML_V1\ANODE: CHENNAI-IND\ASTATUS: BUILDING'; white-space: pre; position: absolute; bottom: 1.5rem; left: 4rem; font-family: 'Space Mono', monospace; font-size: .45rem; letter-spacing: 2px; color: var(--muted); line-height: 1.9; }
 .htag { font-family: 'Space Mono', monospace; font-size: .55rem; letter-spacing: 4px; color: var(--accent); text-transform: uppercase; margin-bottom: 1.2rem; display: flex; align-items: center; gap: .7rem; }
 .htag::after { content: ''; width: 28px; height: 1px; background: var(--accent); }
-.hname { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 3.8vw, 3.8rem); font-weight: 900; line-height: 1.02; letter-spacing: 1px; margin-bottom: .4rem; }
+.hname { font-family: 'Orbitron', sans-serif; font-size: clamp(1.8rem, 3.8vw, 3.8rem); font-weight: 900; line-height: 1.02; letter-spacing: 1px; margin-bottom: .4rem; }
 .hname .l1 { display: block; color: #fff; }
 .hname .l2 { display: block; color: var(--accent); }
 .hrole { font-family: 'Space Mono', monospace; font-size: .65rem; letter-spacing: 3px; color: var(--a2); text-transform: uppercase; margin-bottom: 1.5rem; }
@@ -541,7 +391,6 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
 .or:nth-child(1){width:180px;height:180px;border-color:rgba(0,229,200,.12);animation-duration:18s;}
 .or:nth-child(2){width:136px;height:136px;border-color:rgba(124,92,252,.2);border-style:dashed;animation-duration:12s;animation-direction:reverse;}
 .or:nth-child(3){width:96px;height:96px;border-color:rgba(240,67,108,.18);animation-duration:7.5s;}
-@keyframes spin { to { transform: rotate(360deg); } }
 .odot { position: absolute; width: 6px; height: 6px; border-radius: 50%; top: -3px; left: 50%; transform: translateX(-50%); }
 .or:nth-child(1) .odot{background:var(--accent);box-shadow:0 0 8px var(--accent);}
 .or:nth-child(2) .odot{background:var(--a2);box-shadow:0 0 8px var(--a2);}
@@ -581,29 +430,29 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
 .skfill.l { background: linear-gradient(90deg, #8a6400, var(--a4)); }
 .skfill.s { background: linear-gradient(90deg, #8a1530, var(--a3)); }
 .skpct { font-family: 'Space Mono', monospace; font-size: .55rem; width: 30px; text-align: right; flex-shrink: 0; }
-.skpct.p { color: var(--accent); }.skpct.l { color: var(--a4); }.skpct.s { color: var(--a3); }
+.skpct.p{color:var(--accent)}.skpct.l{color:var(--a4)}.skpct.s{color:var(--a3)}
 .legend { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: .5rem; }
 .leg { display: flex; align-items: center; gap: .4rem; font-family: 'Space Mono', monospace; font-size: .5rem; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
 .leg-d { width: 6px; height: 6px; border-radius: 50%; }
 .pill-grid { display: flex; flex-wrap: wrap; gap: .4rem; }
 .pill { font-family: 'Space Mono', monospace; font-size: .5rem; letter-spacing: 1.5px; padding: .28rem .75rem; border-radius: 1px; text-transform: uppercase; border: 1px solid; cursor: pointer; transition: all .2s; }
-.pill.p { border-color: rgba(0,229,200,.25); color: var(--accent); background: rgba(0,229,200,.04); }.pill.p:hover { background: rgba(0,229,200,.14); }
-.pill.l { border-color: rgba(245,166,35,.22); color: var(--a4); background: rgba(245,166,35,.04); }.pill.l:hover { background: rgba(245,166,35,.14); }
-.pill.s { border-color: rgba(240,67,108,.22); color: var(--a3); background: rgba(240,67,108,.04); }.pill.s:hover { background: rgba(240,67,108,.14); }
+.pill.p{border-color:rgba(0,229,200,.25);color:var(--accent);background:rgba(0,229,200,.04)}.pill.p:hover{background:rgba(0,229,200,.14)}
+.pill.l{border-color:rgba(245,166,35,.22);color:var(--a4);background:rgba(245,166,35,.04)}.pill.l:hover{background:rgba(245,166,35,.14)}
+.pill.s{border-color:rgba(240,67,108,.22);color:var(--a3);background:rgba(240,67,108,.04)}.pill.s:hover{background:rgba(240,67,108,.14)}
 .cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .55rem; }
 .cert { background: var(--surface); border: 1px solid var(--border); border-radius: 2px; padding: .85rem 1rem; cursor: pointer; transition: border-color .2s, background .2s; }
 .cert:hover { border-color: var(--accent); background: rgba(0,229,200,.04); }
 .cert-t { font-size: .8rem; font-weight: 600; color: var(--text); margin-bottom: .25rem; }
 .cert-s { font-family: 'Space Mono', monospace; font-size: .48rem; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
 .cert-st { font-family: 'Space Mono', monospace; font-size: .48rem; letter-spacing: 2px; display: inline-block; margin-top: .3rem; }
-.cert-st.done { color: var(--accent); }.cert-st.ip { color: var(--a4); }
+.cert-st.done{color:var(--accent)}.cert-st.ip{color:var(--a4)}
 .tl2 { position: relative; padding-left: 1.2rem; }
 .tl2::before { content: ''; position: absolute; left: 0; top: 4px; bottom: 4px; width: 1px; background: linear-gradient(to bottom, var(--accent), var(--a2), var(--a3), transparent); }
 .tli { position: relative; padding-left: 1.2rem; margin-bottom: 1.4rem; }
 .tli::before { content: ''; position: absolute; left: -1.28rem; top: 5px; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 7px var(--accent); }
-.tli:nth-child(2)::before { background: var(--a2); box-shadow: 0 0 7px var(--a2); }
-.tli:nth-child(3)::before { background: var(--a3); box-shadow: 0 0 7px var(--a3); }
-.tli:nth-child(4)::before { background: var(--a4); box-shadow: 0 0 7px var(--a4); }
+.tli:nth-child(2)::before{background:var(--a2);box-shadow:0 0 7px var(--a2)}
+.tli:nth-child(3)::before{background:var(--a3);box-shadow:0 0 7px var(--a3)}
+.tli:nth-child(4)::before{background:var(--a4);box-shadow:0 0 7px var(--a4)}
 .tlyr { font-family: 'Space Mono', monospace; font-size: .5rem; letter-spacing: 3px; color: var(--accent); margin-bottom: .25rem; }
 .tltitle { font-size: .86rem; font-weight: 600; margin-bottom: .15rem; }
 .tlsub { font-size: .73rem; color: var(--muted); line-height: 1.5; }
@@ -633,10 +482,10 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
 .cc2:hover { border-color: rgba(0,229,200,.25); background: rgba(0,229,200,.04); transform: translateX(5px); }
 .cc2:hover::before { transform: scaleY(1); }
 .cc2-icon { font-size: 1.05rem; flex-shrink: 0; width: 28px; text-align: center; }
-.cc2-info { flex: 1; }
+.cc2-info { flex: 1; min-width: 0; }
 .cc2-lbl { font-family: 'Space Mono', monospace; font-size: .48rem; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: .2rem; }
-.cc2-val { font-size: .82rem; font-weight: 600; color: var(--text); }
-.cc2-btns { display: flex; gap: .35rem; }
+.cc2-val { font-size: .82rem; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cc2-btns { display: flex; gap: .35rem; flex-shrink: 0; }
 .cc2-btn { font-family: 'Space Mono', monospace; font-size: .48rem; letter-spacing: 2px; padding: .25rem .65rem; border: 1px solid var(--border); background: transparent; color: var(--muted); border-radius: 1px; cursor: pointer; text-transform: uppercase; transition: border-color .2s, color .2s, background .2s; }
 .cc2-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,229,200,.06); }
 .cc2-btn.done { border-color: var(--a4); color: var(--a4); }
@@ -687,17 +536,17 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
 .term-bar { display: flex; align-items: center; justify-content: space-between; padding: .55rem 1rem; border-bottom: 1px solid var(--border); background: rgba(255,255,255,.015); flex-shrink: 0; }
 .term-dots { display: flex; gap: .4rem; }
 .term-dots span { width: 9px; height: 9px; border-radius: 50%; display: block; }
-.term-dots span:nth-child(1){ background: #f0436c; }
-.term-dots span:nth-child(2){ background: #f5a623; }
-.term-dots span:nth-child(3){ background: #00e5c8; }
+.term-dots span:nth-child(1){background:#f0436c}
+.term-dots span:nth-child(2){background:#f5a623}
+.term-dots span:nth-child(3){background:#00e5c8}
 .term-title { font-family: 'Space Mono', monospace; font-size: .56rem; letter-spacing: 1px; color: var(--muted); }
 .term-title b { color: var(--accent); font-weight: 400; }
 .term-body { flex: 1; overflow-y: auto; padding: 1.1rem 1.3rem; font-family: 'Space Mono', monospace; font-size: .74rem; line-height: 1.75; color: var(--text); }
-.term-body .tl-ok { color: var(--accent); }.term-body .tl-dim { color: var(--muted); }.term-body .tl-acc { color: var(--a2); }.term-body .tl-warn { color: var(--a4); }.term-body .tl-err { color: var(--a3); }.term-body .tl-cmd { color: #fff; }
+.term-body .tl-ok{color:var(--accent)}.term-body .tl-dim{color:var(--muted)}.term-body .tl-acc{color:var(--a2)}.term-body .tl-warn{color:var(--a4)}.term-body .tl-err{color:var(--a3)}.term-body .tl-cmd{color:#fff}
 .term-line { white-space: pre-wrap; word-break: break-word; margin-bottom: .15rem; }
 .term-prompt-row { display: flex; align-items: center; gap: .5rem; padding: .85rem 1.3rem; border-top: 1px solid var(--border); flex-shrink: 0; }
 .term-ps { font-family: 'Space Mono', monospace; font-size: .74rem; color: var(--accent); white-space: nowrap; }
-#termIn { flex: 1; background: transparent; border: none; outline: none; color: var(--text); font-family: 'Space Mono', monospace; font-size: .74rem; caret-color: var(--accent); }
+#termIn { flex: 1; background: transparent; border: none; outline: none; color: var(--text); font-family: 'Space Mono', monospace; font-size: .74rem; caret-color: var(--accent); min-width: 0; }
 .term-cursor { width: 6px; height: 13px; background: var(--accent); display: inline-block; vertical-align: middle; animation: blink .9s step-end infinite; box-shadow: 0 0 6px var(--accent); }
 .term-hint { font-family: 'Space Mono', monospace; font-size: .5rem; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-top: .8rem; flex-shrink: 0; }
 .term-hint b { color: var(--a2); }
@@ -705,14 +554,170 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
 /* ============================================================
    FOOTER
 ============================================================ */
-#footer {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: .48rem 2.8rem; border-top: 1px solid var(--border);
-  background: rgba(2,4,12,.95); flex-shrink: 0;
-}
+#footer { display: flex; align-items: center; justify-content: space-between; padding: .48rem 2.8rem; border-top: 1px solid var(--border); background: rgba(2,4,12,.95); flex-shrink: 0; }
 .ft-l { font-family: 'Space Mono', monospace; font-size: .5rem; letter-spacing: 2px; color: var(--muted); }
 .ft-r { font-family: 'Space Mono', monospace; font-size: .5rem; letter-spacing: 2px; color: var(--accent); display: flex; align-items: center; gap: .4rem; }
 #istclock { color: var(--a5); }
+
+/* ============================================================
+   MOBILE RESPONSIVE — TABLET (max 1024px)
+============================================================ */
+@media (max-width: 1024px) {
+  #nav { padding: .7rem 1.5rem; }
+  .tabs { gap: .1rem; }
+  .tb { padding: .38rem .75rem; font-size: .52rem; letter-spacing: 1.5px; }
+
+  /* Home */
+  #t1 { grid-template-columns: 1fr 1fr; }
+  .h-left { padding: 2rem 2rem 3rem 2.5rem; }
+  .h-left::after { left: 2.5rem; }
+
+  /* Skills */
+  .sklbl { width: 100px; }
+
+  /* GitHub */
+  .gstats { grid-template-columns: repeat(2, 1fr); }
+
+  /* Terminal */
+  #t6 { padding: 1.2rem 1.8rem; }
+}
+
+/* ============================================================
+   MOBILE RESPONSIVE — MOBILE (max 768px)
+============================================================ */
+@media (max-width: 768px) {
+  /* Body scrollable on mobile */
+  body { overflow: auto; height: auto; cursor: auto; }
+  #app { position: relative; height: auto; overflow: auto; }
+  #panels { overflow: visible; position: relative; height: auto; }
+  .panel { position: relative; inset: auto; opacity: 1; pointer-events: all; transform: none; transition: none; display: none; overflow: visible; height: auto; }
+  .panel.act { display: flex; flex-direction: column; }
+  #bgc { display: none; }
+
+  /* Splash mobile */
+  .splash-title { font-size: clamp(2rem, 10vw, 4rem); letter-spacing: -1px; }
+  .splash-title .word-3 { letter-spacing: 6px; }
+  .splash-eyebrow { font-size: .55rem; letter-spacing: 5px; margin-bottom: 1.5rem; }
+  .splash-eyebrow::before, .splash-eyebrow::after { width: 20px; }
+  .splash-enter { padding: .8rem 2rem; font-size: .65rem; }
+
+  /* Nav mobile */
+  #nav { padding: .6rem 1.2rem; }
+  .tabs { display: none; }
+  #hamburger { display: flex; }
+  #mobileNav { display: flex; }
+  .nav-r .ns { display: none; }
+  #clk { font-size: .52rem; }
+
+  /* Home tab — stack vertically */
+  #t1 { grid-template-columns: 1fr; grid-template-rows: auto auto; height: auto; }
+  .h-left {
+    padding: 1.8rem 1.4rem 1.2rem 1.8rem;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    justify-content: flex-start;
+  }
+  .h-left::after { display: none; }
+  .hname { font-size: clamp(2rem, 8vw, 3rem); }
+  .hdesc { font-size: .82rem; max-width: 100%; }
+  .hacts { gap: .5rem; }
+  .btn { padding: .55rem 1.1rem; font-size: .58rem; }
+  .h-right { grid-template-rows: unset; overflow: visible; }
+  .dr { grid-template-columns: 1fr 1fr; }
+  .dc { padding: 1rem 1rem; }
+  .dcv { font-size: 1rem; }
+
+  /* Projects — stack sidebar on top */
+  #t2 { height: auto; min-height: 100vh; }
+  .ph { padding: 1rem 1.2rem .8rem; flex-direction: column; align-items: flex-start; gap: .4rem; }
+  .pht { font-size: 1.4rem; }
+  .pb { grid-template-columns: 1fr; height: auto; overflow: visible; }
+  .pl { border-right: none; border-bottom: 1px solid var(--border); overflow: visible; display: grid; grid-template-columns: 1fr 1fr; }
+  .pi2 { padding: .9rem 1rem; }
+  .piname { font-size: .72rem; }
+  .piarr { display: none; }
+  .pd3 { padding: 1.4rem 1.2rem; overflow: visible; }
+  .ostage { height: 150px; }
+  .orings { width: 130px; height: 130px; }
+  .or:nth-child(1){width:130px;height:130px}
+  .or:nth-child(2){width:98px;height:98px}
+  .or:nth-child(3){width:70px;height:70px}
+  .ocore { width: 52px; height: 52px; }
+  .pdtitle { font-size: 1.1rem; }
+
+  /* Skills — stack columns */
+  #t3 { grid-template-columns: 1fr; height: auto; overflow: visible; }
+  .sk-l { border-right: none; border-bottom: 1px solid var(--border); padding: 1.4rem 1.2rem; }
+  .sk-r { padding: 1.4rem 1.2rem; }
+  .sklbl { width: 90px; font-size: .52rem; }
+
+  /* Bio — stack columns */
+  #t4 { grid-template-columns: 1fr; height: auto; overflow: visible; }
+  .bio-l { border-right: none; border-bottom: 1px solid var(--border); padding: 1.4rem 1.2rem; }
+  .bio-r { padding: 1.4rem 1.2rem; }
+  .biotitle { font-size: 1.4rem; }
+  .cc2-val { font-size: .72rem; }
+  .l3g { grid-template-columns: repeat(3, 1fr); }
+
+  /* GitHub */
+  #t5 { padding: 1.4rem 1.2rem; gap: 1rem; }
+  .gstats { grid-template-columns: repeat(2, 1fr); gap: .5rem; }
+  .repos { grid-template-columns: 1fr; }
+  #cgrid { gap: 1.5px; }
+  .cell { width: 7px; height: 7px; }
+  .slinks { gap: .5rem; }
+  .slcard { padding: .7rem .85rem; }
+
+  /* Terminal */
+  #t6 { padding: 1rem 1.2rem; height: auto; min-height: 80vh; }
+  .term-ps { font-size: .6rem; }
+  #termIn { font-size: .62rem; }
+  .term-body { font-size: .62rem; }
+  .term-hint { font-size: .44rem; white-space: normal; }
+
+  /* Footer */
+  #footer { padding: .5rem 1.2rem; flex-direction: column; gap: .3rem; text-align: center; }
+  .ft-l { font-size: .42rem; }
+
+  /* Toast */
+  #toast { bottom: 1rem; right: 1rem; font-size: .52rem; }
+}
+
+/* ============================================================
+   MOBILE RESPONSIVE — SMALL MOBILE (max 480px)
+============================================================ */
+@media (max-width: 480px) {
+  .splash-title { font-size: clamp(1.8rem, 11vw, 3rem); }
+  .splash-title .word-3 { display: none; }
+  .splash-eyebrow { font-size: .5rem; letter-spacing: 4px; }
+
+  .dr { grid-template-columns: 1fr; }
+  .dr .dc { border-right: none; border-bottom: 1px solid var(--border); }
+  .dr .dc:last-child { border-bottom: none; }
+
+  .pl { grid-template-columns: 1fr; }
+
+  .cert-grid { grid-template-columns: 1fr; }
+
+  .gstats { grid-template-columns: repeat(2, 1fr); }
+
+  .hacts { flex-direction: column; }
+  .btn { width: 100%; justify-content: center; }
+
+  .pdbr { flex-direction: column; }
+  .pdbr .btn { width: 100%; justify-content: center; }
+
+  .nav-brand .nb-sub { display: none; }
+
+  .term-hint { font-size: .4rem; }
+  #termIn { font-size: .58rem; }
+  .term-ps { font-size: .55rem; }
+
+  .sec-h { font-size: 1.3rem; }
+  .pht { font-size: 1.2rem; }
+
+  .l3g { grid-template-columns: 1fr 1fr; }
+}
 </style>
 </head>
 <body>
@@ -723,44 +728,31 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
 <div id="toast"></div>
 <div id="cur"><div class="cur-dot"></div><div class="cur-ring"></div></div>
 
-<!-- ============================================================
-     SPLASH SCREEN
-============================================================ -->
+<!-- SPLASH SCREEN -->
 <div id="splash">
   <canvas id="splashCanvas"></canvas>
   <div class="splash-grid"></div>
   <div class="splash-glow"></div>
   <div class="scan-beam"></div>
-
-  <!-- Corner decorations -->
   <div class="splash-corner tl"></div>
   <div class="splash-corner tr"></div>
   <div class="splash-corner bl"></div>
   <div class="splash-corner br"></div>
-
-  <!-- Main content -->
   <div class="splash-content">
     <div class="splash-eyebrow">AI · ML · DEVELOPER</div>
-
     <div class="splash-title">
       <span class="word word-1">A YATHIN</span>
       <span class="word word-2">KUMAR</span>
       <span class="word word-3">PORTFOLIO · 2026</span>
     </div>
-
     <div class="splash-sub">
       <span id="splashTyped"></span><span style="color:var(--accent);animation:blink .8s step-end infinite;display:inline-block">_</span>
     </div>
-
     <button class="splash-enter" id="enterBtn" onclick="exitSplash()">
       <span>Enter Universe <span class="arrow">→</span></span>
     </button>
   </div>
-
-  <!-- Loader bar -->
   <div class="splash-loader"><div class="splash-loader-fill"></div></div>
-
-  <!-- Status -->
   <div class="splash-status">
     <span><span class="status-dot"></span>SYSTEM ONLINE · VIT CHENNAI</span>
     <span>CSC · AI-ML · 2026</span>
@@ -768,9 +760,7 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
   </div>
 </div>
 
-<!-- ============================================================
-     MAIN APP
-============================================================ -->
+<!-- MAIN APP -->
 <div id="app">
 <nav id="nav">
   <div class="nav-brand">
@@ -778,6 +768,7 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
     <span class="nb-dot"></span>
     <span class="nb-sub">AIML · CSC · VIT</span>
   </div>
+  <!-- Desktop tabs -->
   <div class="tabs">
     <button class="tb act" data-tab="1"><span class="tn">01.</span>Home</button>
     <button class="tb" data-tab="2"><span class="tn">02.</span>Projects</button>
@@ -789,8 +780,22 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
   <div class="nav-r">
     <div id="clk"></div>
     <div class="ns"><span class="pd"></span>SYSTEM: ONLINE</div>
+    <!-- Hamburger for mobile -->
+    <button id="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- Mobile Nav Drawer -->
+<div id="mobileNav">
+  <button class="tb act" data-tab="1" onclick="swMobile('1')"><span class="tn">01.</span>Home</button>
+  <button class="tb" data-tab="2" onclick="swMobile('2')"><span class="tn">02.</span>Projects</button>
+  <button class="tb" data-tab="3" onclick="swMobile('3')"><span class="tn">03.</span>Skills</button>
+  <button class="tb" data-tab="4" onclick="swMobile('4')"><span class="tn">04.</span>Bio</button>
+  <button class="tb" data-tab="5" onclick="swMobile('5')"><span class="tn">05.</span>GitHub</button>
+  <button class="tb" data-tab="6" onclick="swMobile('6')"><span class="tn">06.</span>Terminal</button>
+</div>
 
 <div id="panels">
 
@@ -1015,7 +1020,7 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
     <div class="term-body" id="termBody"></div>
     <div class="term-prompt-row">
       <span class="term-ps">yathin@jarvis:~$</span>
-      <input type="text" id="termIn" autocomplete="off" spellcheck="false" placeholder="type 'help' to see commands...">
+      <input type="text" id="termIn" autocomplete="off" spellcheck="false" placeholder="type 'help' ...">
       <span class="term-cursor"></span>
     </div>
   </div>
@@ -1031,538 +1036,279 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
 
 <script>
 /* ============================================================
-   SPLASH 3D CANVAS — WebGL-style with pure Canvas 2D
+   SPLASH 3D CANVAS
 ============================================================ */
 (function() {
   const canvas = document.getElementById('splashCanvas');
   const ctx = canvas.getContext('2d');
   let W, H;
-
-  function resize() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
+  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
   resize();
   window.addEventListener('resize', resize);
 
-  // 3D cube vertices
   function makeCube(cx, cy, cz, size) {
     const h = size / 2;
     return {
       cx, cy, cz,
-      verts: [
-        [-h,-h,-h],[h,-h,-h],[h,h,-h],[-h,h,-h],
-        [-h,-h, h],[h,-h, h],[h,h, h],[-h,h, h]
-      ],
-      edges: [
-        [0,1],[1,2],[2,3],[3,0],
-        [4,5],[5,6],[6,7],[7,4],
-        [0,4],[1,5],[2,6],[3,7]
-      ],
-      rx: Math.random()*Math.PI*2,
-      ry: Math.random()*Math.PI*2,
-      rz: Math.random()*Math.PI*2,
-      vrx: (Math.random()-.5)*.008,
-      vry: (Math.random()-.5)*.012,
-      vrz: (Math.random()-.5)*.006,
+      verts: [[-h,-h,-h],[h,-h,-h],[h,h,-h],[-h,h,-h],[-h,-h,h],[h,-h,h],[h,h,h],[-h,h,h]],
+      edges: [[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]],
+      rx: Math.random()*Math.PI*2, ry: Math.random()*Math.PI*2, rz: Math.random()*Math.PI*2,
+      vrx: (Math.random()-.5)*.008, vry: (Math.random()-.5)*.012, vrz: (Math.random()-.5)*.006,
       col: ['#00e5c8','#7c5cfc','#f0436c','#f5a623','#22d3ee'][Math.floor(Math.random()*5)],
       alpha: .15 + Math.random()*.2
     };
   }
-
-  function project(x, y, z, fov, cx, cy) {
-    const f = fov / (fov + z);
-    return { x: cx + x * f, y: cy + y * f, f };
-  }
-
+  function project(x, y, z, fov, cx, cy) { const f = fov/(fov+z); return {x: cx+x*f, y: cy+y*f}; }
   function rotatePt(x, y, z, rx, ry, rz) {
-    // rotate X
-    let y1 = y*Math.cos(rx) - z*Math.sin(rx);
-    let z1 = y*Math.sin(rx) + z*Math.cos(rx);
-    // rotate Y
-    let x2 = x*Math.cos(ry) + z1*Math.sin(ry);
-    let z2 = -x*Math.sin(ry) + z1*Math.cos(ry);
-    // rotate Z
-    let x3 = x2*Math.cos(rz) - y1*Math.sin(rz);
-    let y3 = x2*Math.sin(rz) + y1*Math.cos(rz);
-    return { x: x3, y: y3, z: z2 };
+    let y1=y*Math.cos(rx)-z*Math.sin(rx), z1=y*Math.sin(rx)+z*Math.cos(rx);
+    let x2=x*Math.cos(ry)+z1*Math.sin(ry), z2=-x*Math.sin(ry)+z1*Math.cos(ry);
+    let x3=x2*Math.cos(rz)-y1*Math.sin(rz), y3=x2*Math.sin(rz)+y1*Math.cos(rz);
+    return {x:x3, y:y3, z:z2};
   }
 
   const cubes = [];
-  for (let i = 0; i < 12; i++) {
-    const cx = (Math.random() - .5) * 1400;
-    const cy = (Math.random() - .5) * 800;
-    const cz = Math.random() * 600 + 200;
-    cubes.push(makeCube(cx, cy, cz, 60 + Math.random() * 80));
-  }
+  for (let i=0;i<12;i++) cubes.push(makeCube((Math.random()-.5)*1400,(Math.random()-.5)*800,Math.random()*600+200,60+Math.random()*80));
 
-  // Particle field
   const particles = [];
-  for (let i = 0; i < 120; i++) {
-    particles.push({
-      x: Math.random() * 1920,
-      y: Math.random() * 1080,
-      vx: (Math.random() - .5) * .3,
-      vy: -(Math.random() * .8 + .2),
-      r: Math.random() * 1.5 + .5,
-      alpha: Math.random() * .6 + .2,
-      col: Math.random() > .6 ? '#00e5c8' : Math.random() > .5 ? '#7c5cfc' : '#f0436c'
-    });
-  }
+  for (let i=0;i<120;i++) particles.push({x:Math.random()*1920,y:Math.random()*1080,vx:(Math.random()-.5)*.3,vy:-(Math.random()*.8+.2),r:Math.random()*1.5+.5,alpha:Math.random()*.6+.2,col:Math.random()>.6?'#00e5c8':Math.random()>.5?'#7c5cfc':'#f0436c'});
 
-  // Grid 3D perspective
-  function drawGrid3D(t) {
-    const fov = 400;
-    const cx = W / 2, cy = H / 2;
-    const tilt = .6;
-    const gridSpan = 800;
-    const gridStep = 80;
-    const gridY = 200;
-    ctx.save();
-    ctx.strokeStyle = 'rgba(0,229,200,0.06)';
-    ctx.lineWidth = .5;
-    for (let x = -gridSpan; x <= gridSpan; x += gridStep) {
-      const p1 = project(x, gridY, -gridSpan, fov, cx, cy);
-      const p2 = project(x, gridY, gridSpan, fov, cx, cy);
-      ctx.beginPath();
-      ctx.moveTo(p1.x, p1.y);
-      ctx.lineTo(p2.x, p2.y);
-      ctx.stroke();
-    }
-    for (let z = -gridSpan; z <= gridSpan; z += gridStep) {
-      const p1 = project(-gridSpan, gridY, z, fov, cx, cy);
-      const p2 = project(gridSpan, gridY, z, fov, cx, cy);
-      ctx.beginPath();
-      ctx.moveTo(p1.x, p1.y);
-      ctx.lineTo(p2.x, p2.y);
-      ctx.stroke();
-    }
+  function drawGrid3D() {
+    const fov=400,cx=W/2,cy=H/2,gridSpan=800,gridStep=80,gridY=200;
+    ctx.save(); ctx.strokeStyle='rgba(0,229,200,0.06)'; ctx.lineWidth=.5;
+    for(let x=-gridSpan;x<=gridSpan;x+=gridStep){const p1=project(x,gridY,-gridSpan,fov,cx,cy),p2=project(x,gridY,gridSpan,fov,cx,cy);ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.stroke();}
+    for(let z=-gridSpan;z<=gridSpan;z+=gridStep){const p1=project(-gridSpan,gridY,z,fov,cx,cy),p2=project(gridSpan,gridY,z,fov,cx,cy);ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.stroke();}
     ctx.restore();
   }
 
-  let splashT = 0;
+  let splashT=0;
   function animateSplash() {
-    if (!document.getElementById('splash')) return;
-    if (document.getElementById('splash').style.display === 'none') return;
-    splashT += .008;
-    ctx.clearRect(0, 0, W, H);
-
-    // Background radial
-    const grad = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, W*.6);
-    grad.addColorStop(0, 'rgba(0,229,200,0.04)');
-    grad.addColorStop(.5, 'rgba(124,92,252,0.03)');
-    grad.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, W, H);
-
-    drawGrid3D(splashT);
-
-    // Draw cubes
-    const fov = 500;
-    const cx = W / 2, cy = H / 2;
-    cubes.forEach(cube => {
-      cube.rx += cube.vrx;
-      cube.ry += cube.vry;
-      cube.rz += cube.vrz;
-
-      const projected = cube.verts.map(([x, y, z]) => {
-        const r = rotatePt(x, y, z, cube.rx, cube.ry, cube.rz);
-        return project(r.x + cube.cx, r.y + cube.cy, r.z + cube.cz, fov, cx, cy);
-      });
-
-      ctx.save();
-      ctx.globalAlpha = cube.alpha;
-      ctx.strokeStyle = cube.col;
-      ctx.lineWidth = 1;
-      ctx.shadowColor = cube.col;
-      ctx.shadowBlur = 8;
-      cube.edges.forEach(([a, b]) => {
-        const p1 = projected[a], p2 = projected[b];
-        if (!p1 || !p2) return;
-        ctx.beginPath();
-        ctx.moveTo(p1.x, p1.y);
-        ctx.lineTo(p2.x, p2.y);
-        ctx.stroke();
-      });
+    if(!document.getElementById('splash')||document.getElementById('splash').style.display==='none') return;
+    splashT+=.008;
+    ctx.clearRect(0,0,W,H);
+    const grad=ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,W*.6);
+    grad.addColorStop(0,'rgba(0,229,200,0.04)');grad.addColorStop(.5,'rgba(124,92,252,0.03)');grad.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=grad;ctx.fillRect(0,0,W,H);
+    drawGrid3D();
+    const fov=500,cx=W/2,cy=H/2;
+    cubes.forEach(cube=>{
+      cube.rx+=cube.vrx;cube.ry+=cube.vry;cube.rz+=cube.vrz;
+      const projected=cube.verts.map(([x,y,z])=>{const r=rotatePt(x,y,z,cube.rx,cube.ry,cube.rz);return project(r.x+cube.cx,r.y+cube.cy,r.z+cube.cz,fov,cx,cy);});
+      ctx.save();ctx.globalAlpha=cube.alpha;ctx.strokeStyle=cube.col;ctx.lineWidth=1;ctx.shadowColor=cube.col;ctx.shadowBlur=8;
+      cube.edges.forEach(([a,b])=>{const p1=projected[a],p2=projected[b];if(!p1||!p2)return;ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.stroke();});
       ctx.restore();
     });
-
-    // Draw particles
-    particles.forEach(p => {
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.y < -10) { p.y = H + 10; p.x = Math.random() * W; }
-      if (p.x < -10) p.x = W + 10;
-      if (p.x > W + 10) p.x = -10;
-      ctx.save();
-      ctx.globalAlpha = p.alpha * (Math.sin(splashT * 2 + p.x) * .3 + .7);
-      ctx.fillStyle = p.col;
-      ctx.shadowColor = p.col;
-      ctx.shadowBlur = 6;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.restore();
+    particles.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.y<-10){p.y=H+10;p.x=Math.random()*W;}
+      if(p.x<-10)p.x=W+10;if(p.x>W+10)p.x=-10;
+      ctx.save();ctx.globalAlpha=p.alpha*(Math.sin(splashT*2+p.x)*.3+.7);ctx.fillStyle=p.col;ctx.shadowColor=p.col;ctx.shadowBlur=6;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();ctx.restore();
     });
-
-    // Connection lines between nearby particles
-    ctx.save();
-    ctx.strokeStyle = 'rgba(0,229,200,0.06)';
-    ctx.lineWidth = .5;
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const d = Math.sqrt(dx*dx + dy*dy);
-        if (d < 100) {
-          ctx.globalAlpha = (1 - d / 100) * .15;
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.stroke();
-        }
-      }
-    }
+    ctx.save();ctx.strokeStyle='rgba(0,229,200,0.06)';ctx.lineWidth=.5;
+    for(let i=0;i<particles.length;i++){for(let j=i+1;j<particles.length;j++){const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<100){ctx.globalAlpha=(1-d/100)*.15;ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.stroke();}}}
     ctx.restore();
-
     requestAnimationFrame(animateSplash);
   }
   animateSplash();
 
-  // Typewriter for splash subtitle
-  const phrases = [
-    'A JOURNEY OF THOUGHTS & CODE',
-    'AI · ML · Voice Intelligence',
-    'Python · NLP · GUI Dev',
-    'VIT Chennai · 2026–2030',
-    'Turning Ideas Into Intelligence'
-  ];
-  let pi2 = 0, ci2 = 0, del2 = false;
-  const splashTyped = document.getElementById('splashTyped');
-  function typeSplash() {
-    if (!splashTyped) return;
-    const p = phrases[pi2];
-    if (!del2) {
-      splashTyped.textContent = p.slice(0, ++ci2);
-      if (ci2 === p.length) { del2 = true; setTimeout(typeSplash, 2200); return; }
-    } else {
-      splashTyped.textContent = p.slice(0, --ci2);
-      if (ci2 === 0) { del2 = false; pi2 = (pi2+1) % phrases.length; }
-    }
-    setTimeout(typeSplash, del2 ? 35 : 70);
+  // Typewriter for splash
+  const phrases=['A JOURNEY OF THOUGHTS & CODE','AI · ML · Voice Intelligence','Python · NLP · GUI Dev','VIT Chennai · 2026–2030','Turning Ideas Into Intelligence'];
+  let pi2=0,ci2=0,del2=false;
+  const splashTyped=document.getElementById('splashTyped');
+  function typeSplash(){
+    if(!splashTyped)return;
+    const p=phrases[pi2];
+    if(!del2){splashTyped.textContent=p.slice(0,++ci2);if(ci2===p.length){del2=true;setTimeout(typeSplash,2200);return;}}
+    else{splashTyped.textContent=p.slice(0,--ci2);if(ci2===0){del2=false;pi2=(pi2+1)%phrases.length;}}
+    setTimeout(typeSplash,del2?35:70);
   }
-  setTimeout(typeSplash, 1200);
+  setTimeout(typeSplash,1200);
 })();
 
 /* ============================================================
    SPLASH EXIT
 ============================================================ */
-function exitSplash() {
-  const splash = document.getElementById('splash');
-  const app = document.getElementById('app');
+function exitSplash(){
+  const splash=document.getElementById('splash'),app=document.getElementById('app');
   splash.classList.add('exit');
-  setTimeout(() => {
-    splash.style.display = 'none';
-    app.classList.add('visible');
-    rproj('jarvis');
-  }, 1200);
+  setTimeout(()=>{ splash.style.display='none'; app.classList.add('visible'); rproj('jarvis'); },1200);
 }
-
-// Auto-enter after 6 seconds
-setTimeout(() => {
-  const splash = document.getElementById('splash');
-  if (splash && !splash.classList.contains('exit')) exitSplash();
-}, 65000);
+setTimeout(()=>{ const splash=document.getElementById('splash'); if(splash&&!splash.classList.contains('exit'))exitSplash(); },65000);
 
 /* ============================================================
-   NEURAL CANVAS BACKGROUND
+   NEURAL CANVAS BACKGROUND (desktop only)
 ============================================================ */
-const C = document.getElementById('bgc');
-const ctx2 = C.getContext('2d');
-let W2, H2, nodes = [];
-const NC = 55, MD = 135;
-let mx = 0, my = 0;
-
-function rsz() { W2 = C.width = innerWidth; H2 = C.height = innerHeight; }
-function initN() {
-  nodes = [];
-  for (let i = 0; i < NC; i++) {
-    nodes.push({
-      x: Math.random()*W2, y: Math.random()*H2,
-      vx: (Math.random()-.5)*.22, vy: (Math.random()-.5)*.22,
-      r: 1 + Math.random()*1.8,
-      col: Math.random()>.7 ? '#7c5cfc' : Math.random()>.5 ? '#f0436c' : '#00e5c8'
-    });
+const isMobile = window.innerWidth <= 768;
+if (!isMobile) {
+  const C=document.getElementById('bgc'),ctx2=C.getContext('2d');
+  let W2,H2,nodes=[];
+  const NC=55,MD=135;
+  let mx=0,my=0;
+  function rsz(){W2=C.width=innerWidth;H2=C.height=innerHeight;}
+  function initN(){nodes=[];for(let i=0;i<NC;i++)nodes.push({x:Math.random()*W2,y:Math.random()*H2,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,r:1+Math.random()*1.8,col:Math.random()>.7?'#7c5cfc':Math.random()>.5?'#f0436c':'#00e5c8'});}
+  function frame(){
+    ctx2.clearRect(0,0,W2,H2);
+    for(let i=0;i<nodes.length;i++){for(let j=i+1;j<nodes.length;j++){const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<MD){ctx2.beginPath();ctx2.strokeStyle=`rgba(0,229,200,${(1-d/MD)*.14})`;ctx2.lineWidth=.4;ctx2.moveTo(nodes[i].x,nodes[i].y);ctx2.lineTo(nodes[j].x,nodes[j].y);ctx2.stroke();}}const dx=nodes[i].x-mx,dy=nodes[i].y-my,d=Math.sqrt(dx*dx+dy*dy);if(d<175){ctx2.beginPath();ctx2.strokeStyle=`rgba(0,229,200,${(1-d/175)*.28})`;ctx2.lineWidth=.6;ctx2.moveTo(nodes[i].x,nodes[i].y);ctx2.lineTo(mx,my);ctx2.stroke();}}
+    nodes.forEach(n=>{ctx2.beginPath();ctx2.arc(n.x,n.y,n.r,0,Math.PI*2);ctx2.fillStyle=n.col;ctx2.globalAlpha=.42;ctx2.fill();ctx2.globalAlpha=1;n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>W2)n.vx*=-1;if(n.y<0||n.y>H2)n.vy*=-1;});
+    requestAnimationFrame(frame);
   }
+  rsz();initN();frame();
+  window.addEventListener('resize',()=>{rsz();initN();});
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
 }
-function frame() {
-  ctx2.clearRect(0, 0, W2, H2);
-  for (let i = 0; i < nodes.length; i++) {
-    for (let j = i+1; j < nodes.length; j++) {
-      const dx = nodes[i].x-nodes[j].x, dy = nodes[i].y-nodes[j].y;
-      const d = Math.sqrt(dx*dx+dy*dy);
-      if (d < MD) {
-        ctx2.beginPath();
-        ctx2.strokeStyle = `rgba(0,229,200,${(1-d/MD)*.14})`;
-        ctx2.lineWidth = .4;
-        ctx2.moveTo(nodes[i].x, nodes[i].y);
-        ctx2.lineTo(nodes[j].x, nodes[j].y);
-        ctx2.stroke();
-      }
-    }
-    const dx = nodes[i].x-mx, dy = nodes[i].y-my;
-    const d = Math.sqrt(dx*dx+dy*dy);
-    if (d < 175) {
-      ctx2.beginPath();
-      ctx2.strokeStyle = `rgba(0,229,200,${(1-d/175)*.28})`;
-      ctx2.lineWidth = .6;
-      ctx2.moveTo(nodes[i].x, nodes[i].y);
-      ctx2.lineTo(mx, my);
-      ctx2.stroke();
-    }
-  }
-  nodes.forEach(n => {
-    ctx2.beginPath();
-    ctx2.arc(n.x, n.y, n.r, 0, Math.PI*2);
-    ctx2.fillStyle = n.col;
-    ctx2.globalAlpha = .42;
-    ctx2.fill();
-    ctx2.globalAlpha = 1;
-    n.x += n.vx; n.y += n.vy;
-    if (n.x < 0 || n.x > W2) n.vx *= -1;
-    if (n.y < 0 || n.y > H2) n.vy *= -1;
-  });
-  requestAnimationFrame(frame);
-}
-rsz(); initN(); frame();
-window.addEventListener('resize', () => { rsz(); initN(); });
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
 
 /* ============================================================
    CURSOR
 ============================================================ */
-const curEl = document.getElementById('cur');
-const dot = curEl.querySelector('.cur-dot');
-const ring = curEl.querySelector('.cur-ring');
-let cx3 = 0, cy3 = 0, rx3 = 0, ry3 = 0;
-document.addEventListener('mousemove', e => { cx3 = e.clientX; cy3 = e.clientY; });
-(function animCur() {
-  dot.style.left = cx3+'px'; dot.style.top = cy3+'px';
-  rx3 += (cx3-rx3)*.12; ry3 += (cy3-ry3)*.12;
-  ring.style.left = rx3+'px'; ring.style.top = ry3+'px';
-  requestAnimationFrame(animCur);
-})();
-document.querySelectorAll('button,.pi2,.cc2,.slcard,.cert,.repo,.sp,.pill').forEach(el => {
-  el.addEventListener('mouseenter', () => document.body.classList.add('hov'));
-  el.addEventListener('mouseleave', () => document.body.classList.remove('hov'));
+const curEl=document.getElementById('cur');
+if(curEl){
+  const dot=curEl.querySelector('.cur-dot'),ring=curEl.querySelector('.cur-ring');
+  let cx3=0,cy3=0,rx3=0,ry3=0;
+  document.addEventListener('mousemove',e=>{cx3=e.clientX;cy3=e.clientY;});
+  (function animCur(){dot.style.left=cx3+'px';dot.style.top=cy3+'px';rx3+=(cx3-rx3)*.12;ry3+=(cy3-ry3)*.12;ring.style.left=rx3+'px';ring.style.top=ry3+'px';requestAnimationFrame(animCur);})();
+}
+document.querySelectorAll('button,.pi2,.cc2,.slcard,.cert,.repo,.sp,.pill').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
 });
+
+/* ============================================================
+   MOBILE NAV
+============================================================ */
+function toggleMobileNav(){
+  const hb=document.getElementById('hamburger');
+  const mn=document.getElementById('mobileNav');
+  hb.classList.toggle('open');
+  mn.classList.toggle('open');
+}
+function swMobile(id){
+  toggleMobileNav();
+  setTimeout(()=>sw(id),200);
+}
 
 /* ============================================================
    TAB SWITCHING
 ============================================================ */
-function sw(id) {
-  document.querySelectorAll('.tb').forEach(b => b.classList.toggle('act', b.dataset.tab === id));
-  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('act', p.id === 't'+id));
-  if (id === '2') rproj('jarvis');
-  if (id === '6') { initTerminal(); setTimeout(() => document.getElementById('termIn').focus(), 150); }
+function sw(id){
+  document.querySelectorAll('.tb').forEach(b=>b.classList.toggle('act',b.dataset.tab===id));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('act',p.id==='t'+id));
+  // On mobile, scroll to top
+  if(window.innerWidth<=768) window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='2') rproj('jarvis');
+  if(id==='6'){initTerminal();setTimeout(()=>document.getElementById('termIn').focus(),150);}
 }
-document.querySelectorAll('.tb').forEach(b => b.addEventListener('click', () => sw(b.dataset.tab)));
+document.querySelectorAll('.tb').forEach(b=>b.addEventListener('click',()=>sw(b.dataset.tab)));
 
 /* ============================================================
    TYPEWRITER (home)
 ============================================================ */
-const phrases = [
-  'Building JARVIS AI Assistant...',
-  'Exploring Machine Intelligence.',
-  'Python · SQL · AI-ML.',
-  'Chennai · India · 2026.',
-  'Voice AI · NLP · GUI Dev.'
-];
-let pi = 0, ci = 0, del = false;
-const tgt = document.getElementById('tgt');
-function type() {
-  const p = phrases[pi];
-  if (!del) {
-    tgt.textContent = p.slice(0, ++ci);
-    if (ci === p.length) { del = true; setTimeout(type, 2000); return; }
-  } else {
-    tgt.textContent = p.slice(0, --ci);
-    if (ci === 0) { del = false; pi = (pi+1) % phrases.length; }
-  }
-  setTimeout(type, del ? 40 : 75);
+const phrases=['Building JARVIS AI Assistant...','Exploring Machine Intelligence.','Python · SQL · AI-ML.','Chennai · India · 2026.','Voice AI · NLP · GUI Dev.'];
+let pi=0,ci=0,del=false;
+const tgt=document.getElementById('tgt');
+function type(){
+  const p=phrases[pi];
+  if(!del){tgt.textContent=p.slice(0,++ci);if(ci===p.length){del=true;setTimeout(type,2000);return;}}
+  else{tgt.textContent=p.slice(0,--ci);if(ci===0){del=false;pi=(pi+1)%phrases.length;}}
+  setTimeout(type,del?40:75);
 }
 type();
 
 /* ============================================================
    PROJECT DATA
 ============================================================ */
-const PD = {
-  jarvis: {
-    tags: ['AI Model','Voice Recognition','Python','GUI','NLP'],
-    title: 'JARVIS AI MODEL',
-    desc: "An intelligent AI assistant inspired by Tony Stark's JARVIS — built with voice recognition, NLP, and real-time interaction. A personal digital intelligence that understands and responds to commands.",
-    features: ['Wake-word activation & continuous voice recognition','Natural language understanding & context memory','Text-to-Speech engine with natural voice (pyttsx3)','Modular GUI dashboard with live activity feed','AI-powered responses via integrated language model','System commands & task automation support'],
-    stats: [['AI','Powered'],['V1','Version'],['24/7','Always On']],
-    github: 'https://github.com/playingkinggame/deployjarvis'
-  },
-  vrec: {
-    tags: ['Speech','Python','NLP','SpeechRecognition'],
-    title: 'VOICE RECOGNITION ENGINE',
-    desc: 'Standalone speech-to-text module that converts spoken language to text with high accuracy. The input backbone of JARVIS with multi-language detection and noise filtering.',
-    features: ['Real-time speech-to-text transcription','Background noise reduction & filtering','Multi-language detection support','Callback-based event system for integration','Low-latency streaming mode'],
-    stats: [['~95%','Accuracy'],['Real','Time'],['Multi','Language']],
-    github: 'https://github.com/playingkinggame/deployjarvis'
-  },
-  tts: {
-    tags: ['Text-to-Speech','Audio','Python','pyttsx3'],
-    title: 'TEXT-TO-SPEECH MODULE',
-    desc: 'Flexible TTS engine that converts text responses to natural speech. Adjustable rate, volume, and voice selection — the voice output layer of JARVIS.',
-    features: ['Natural voice synthesis via pyttsx3','Adjustable speech rate & volume','Multiple voice profile selection','Async non-blocking speech queue','Text pre-processing & punctuation handling'],
-    stats: [['Fast','Output'],['Queue','Based'],['Custom','Voice']],
-    github: 'https://github.com/playingkinggame/deployjarvis'
-  },
-  gui: {
-    tags: ['GUI','Python','tkinter','Dashboard'],
-    title: 'AI DASHBOARD GUI',
-    desc: 'Custom graphical interface for JARVIS — dark mode, real-time activity log, voice waveform, system status indicators. Built entirely in Python with tkinter.',
-    features: ['Dark-mode futuristic UI theme','Live voice activity waveform visualizer','Real-time JARVIS response & action log','System status & module health indicators','Settings panel for voice & model config'],
-    stats: [['Dark','Mode UI'],['Live','Waveform'],['Python','Built']],
-    github: 'https://github.com/playingkinggame/deployjarvis'
-  }
+const PD={
+  jarvis:{tags:['AI Model','Voice Recognition','Python','GUI','NLP'],title:'JARVIS AI MODEL',desc:"An intelligent AI assistant inspired by Tony Stark's JARVIS — built with voice recognition, NLP, and real-time interaction. A personal digital intelligence that understands and responds to commands.",features:['Wake-word activation & continuous voice recognition','Natural language understanding & context memory','Text-to-Speech engine with natural voice (pyttsx3)','Modular GUI dashboard with live activity feed','AI-powered responses via integrated language model','System commands & task automation support'],stats:[['AI','Powered'],['V1','Version'],['24/7','Always On']],github:'https://github.com/playingkinggame/deployjarvis'},
+  vrec:{tags:['Speech','Python','NLP','SpeechRecognition'],title:'VOICE RECOGNITION ENGINE',desc:'Standalone speech-to-text module that converts spoken language to text with high accuracy. The input backbone of JARVIS with multi-language detection and noise filtering.',features:['Real-time speech-to-text transcription','Background noise reduction & filtering','Multi-language detection support','Callback-based event system for integration','Low-latency streaming mode'],stats:[['~95%','Accuracy'],['Real','Time'],['Multi','Language']],github:'https://github.com/playingkinggame/deployjarvis'},
+  tts:{tags:['Text-to-Speech','Audio','Python','pyttsx3'],title:'TEXT-TO-SPEECH MODULE',desc:'Flexible TTS engine that converts text responses to natural speech. Adjustable rate, volume, and voice selection — the voice output layer of JARVIS.',features:['Natural voice synthesis via pyttsx3','Adjustable speech rate & volume','Multiple voice profile selection','Async non-blocking speech queue','Text pre-processing & punctuation handling'],stats:[['Fast','Output'],['Queue','Based'],['Custom','Voice']],github:'https://github.com/playingkinggame/deployjarvis'},
+  gui:{tags:['GUI','Python','tkinter','Dashboard'],title:'AI DASHBOARD GUI',desc:'Custom graphical interface for JARVIS — dark mode, real-time activity log, voice waveform, system status indicators. Built entirely in Python with tkinter.',features:['Dark-mode futuristic UI theme','Live voice activity waveform visualizer','Real-time JARVIS response & action log','System status & module health indicators','Settings panel for voice & model config'],stats:[['Dark','Mode UI'],['Live','Waveform'],['Python','Built']],github:'https://github.com/playingkinggame/deployjarvis'}
 };
 
-function rproj(k) {
-  const p = PD[k]; if (!p) return;
-  const det = document.getElementById('pdet');
-  let sw2 = '<div class="sw2">';
-  for (let i = 0; i < 18; i++) {
-    const h = 5 + Math.random()*17;
-    sw2 += `<div class="sb2" style="height:${h}px;animation-duration:${.3+Math.random()*.6}s;animation-delay:${Math.random()*.35}s;opacity:${i<3||i>14?.18:.55}"></div>`;
-  }
-  sw2 += '</div>';
-  det.innerHTML = `<div class="ostage"><div class="orings"><div class="or"><div class="odot"></div></div><div class="or"><div class="odot"></div></div><div class="or"><div class="odot"></div></div><div class="ocore"><span class="olabel">AI</span></div>${sw2}</div></div><div class="pdtags">${p.tags.map(t=>`<span class="pdtag">${t}</span>`).join('')}</div><div class="pdtitle">${p.title}</div><p class="pddesc">${p.desc}</p><ul class="pdfl">${p.features.map(f=>`<li>${f}</li>`).join('')}</ul><div class="pdstats">${p.stats.map(s=>`<div class="pdstat"><span class="pdsn">${s[0]}</span><span class="pdsl">${s[1]}</span></div>`).join('')}</div><div class="pdbr"><button class="btn bc" onclick="sw('4')">Collaborate →</button><button class="btn bo" onclick="window.open('${p.github}','_blank')">View on GitHub</button></div>`;
+function rproj(k){
+  const p=PD[k];if(!p)return;
+  const det=document.getElementById('pdet');
+  let sw2='<div class="sw2">';
+  for(let i=0;i<18;i++){const h=5+Math.random()*17;sw2+=`<div class="sb2" style="height:${h}px;animation-duration:${.3+Math.random()*.6}s;animation-delay:${Math.random()*.35}s;opacity:${i<3||i>14?.18:.55}"></div>`;}
+  sw2+='</div>';
+  det.innerHTML=`<div class="ostage"><div class="orings"><div class="or"><div class="odot"></div></div><div class="or"><div class="odot"></div></div><div class="or"><div class="odot"></div></div><div class="ocore"><span class="olabel">AI</span></div>${sw2}</div></div><div class="pdtags">${p.tags.map(t=>`<span class="pdtag">${t}</span>`).join('')}</div><div class="pdtitle">${p.title}</div><p class="pddesc">${p.desc}</p><ul class="pdfl">${p.features.map(f=>`<li>${f}</li>`).join('')}</ul><div class="pdstats">${p.stats.map(s=>`<div class="pdstat"><span class="pdsn">${s[0]}</span><span class="pdsl">${s[1]}</span></div>`).join('')}</div><div class="pdbr"><button class="btn bc" onclick="sw('4')">Collaborate →</button><button class="btn bo" onclick="window.open('${p.github}','_blank')">View on GitHub</button></div>`;
 }
-document.getElementById('plist').addEventListener('click', e => {
-  const item = e.target.closest('.pi2'); if (!item) return;
-  document.querySelectorAll('.pi2').forEach(i => i.classList.remove('sel'));
+document.getElementById('plist').addEventListener('click',e=>{
+  const item=e.target.closest('.pi2');if(!item)return;
+  document.querySelectorAll('.pi2').forEach(i=>i.classList.remove('sel'));
   item.classList.add('sel');
   rproj(item.dataset.p);
+  // On mobile, scroll to detail
+  if(window.innerWidth<=768) setTimeout(()=>document.getElementById('pdet').scrollIntoView({behavior:'smooth',block:'start'}),100);
 });
 rproj('jarvis');
 
 /* ============================================================
    CONTRIBUTION GRID
 ============================================================ */
-(function() {
-  const g = document.getElementById('cgrid');
-  if (!g) return;
-  const lvls = ['rgba(255,255,255,.05)','rgba(0,229,200,.12)','rgba(0,229,200,.3)','rgba(0,229,200,.55)','rgba(0,229,200,.85)'];
-  for (let i = 0; i < 52*7; i++) {
-    const w = Math.random();
-    const lv = w > .95 ? 4 : w > .8 ? 3 : w > .6 ? 2 : w > .42 ? 1 : 0;
-    const d = document.createElement('div');
-    d.className = 'cell';
-    d.style.background = lvls[lv];
-    g.appendChild(d);
-  }
+(function(){
+  const g=document.getElementById('cgrid');if(!g)return;
+  const lvls=['rgba(255,255,255,.05)','rgba(0,229,200,.12)','rgba(0,229,200,.3)','rgba(0,229,200,.55)','rgba(0,229,200,.85)'];
+  for(let i=0;i<52*7;i++){const w=Math.random(),lv=w>.95?4:w>.8?3:w>.6?2:w>.42?1:0,d=document.createElement('div');d.className='cell';d.style.background=lvls[lv];g.appendChild(d);}
 })();
 
 /* ============================================================
    CONTACT
 ============================================================ */
-function toast(m) {
-  const t = document.getElementById('toast');
-  t.textContent = m; t.classList.add('show');
-  clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('show'), 2700);
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2700);}
+async function doCopy(text,bid,msg){
+  const btn=document.getElementById(bid);
+  try{await navigator.clipboard.writeText(text);}catch{const ta=document.createElement('textarea');ta.value=text;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);}
+  btn.textContent='✓';btn.classList.add('done');toast(msg);
+  setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('done');},2500);
 }
-async function doCopy(text, bid, msg) {
-  const btn = document.getElementById(bid);
-  try { await navigator.clipboard.writeText(text); } catch {
-    const ta = document.createElement('textarea');
-    ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
-    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
-  }
-  btn.textContent = '✓'; btn.classList.add('done'); toast(msg);
-  setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('done'); }, 2500);
-}
-function doCall() { toast('Opening phone dialer...'); setTimeout(() => { location.href = 'tel:+919842528662'; }, 400); }
-function doMail() { toast('Opening mail...'); setTimeout(() => { location.href = 'mailto:playingkinggame@gmail.com'; }, 400); }
-function doMaps() { toast('Opening maps...'); setTimeout(() => { window.open('https://maps.google.com/?q=Chennai,India','_blank'); }, 400); }
-function sendQM() {
-  const s = document.getElementById('qs').value.trim() || 'Hello Yathin!';
-  const b = document.getElementById('qb').value.trim();
-  if (!b) { toast('Please type a message.'); return; }
+function doCall(){toast('Opening phone dialer...');setTimeout(()=>{location.href='tel:+919842528662';},400);}
+function doMail(){toast('Opening mail...');setTimeout(()=>{location.href='mailto:playingkinggame@gmail.com';},400);}
+function doMaps(){toast('Opening maps...');setTimeout(()=>{window.open('https://maps.google.com/?q=Chennai,India','_blank');},400);}
+function sendQM(){
+  const s=document.getElementById('qs').value.trim()||'Hello Yathin!',b=document.getElementById('qb').value.trim();
+  if(!b){toast('Please type a message.');return;}
   toast('Opening mail app...');
-  setTimeout(() => { location.href = `mailto:playingkinggame@gmail.com?subject=${encodeURIComponent(s)}&body=${encodeURIComponent(b)}`; }, 400);
+  setTimeout(()=>{location.href=`mailto:playingkinggame@gmail.com?subject=${encodeURIComponent(s)}&body=${encodeURIComponent(b)}`;},400);
 }
-function downloadResume() { toast('Resume feature — add your PDF link here.'); }
+function downloadResume(){toast('Resume feature — add your PDF link here.');}
 
 /* ============================================================
    CLOCK
 ============================================================ */
-function updateClock() {
-  const d = new Date(new Date().toLocaleString('en-US', {timeZone: 'Asia/Kolkata'}));
-  const str = `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}:${String(d.getSeconds()).padStart(2,'0')}`;
-  const el = document.getElementById('clk');
-  const el2 = document.getElementById('istclock');
-  if (el) el.textContent = str;
-  if (el2) el2.textContent = str;
+function updateClock(){
+  const d=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Kolkata'}));
+  const str=`${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}:${String(d.getSeconds()).padStart(2,'0')}`;
+  const el=document.getElementById('clk'),el2=document.getElementById('istclock');
+  if(el)el.textContent=str;if(el2)el2.textContent=str;
 }
-updateClock(); setInterval(updateClock, 1000);
+updateClock();setInterval(updateClock,1000);
 
 /* ============================================================
    TERMINAL
 ============================================================ */
-let termBooted = false;
-const TERM_HELP = [
-  ["about","Who is Yathin Kumar"],["skills","List all skills"],["projects","List projects"],
-  ["contact","Contact info"],["education","Education details"],["goals","2026 roadmap"],
-  ["jarvis","JARVIS AI info"],["clear","Clear terminal"]
-];
-function termLine(html) {
-  const body = document.getElementById('termBody');
-  const d = document.createElement('div');
-  d.className = 'term-line';
-  d.innerHTML = html;
-  body.appendChild(d);
-  body.scrollTop = body.scrollHeight;
+let termBooted=false;
+const TERM_HELP=[['about','Who is Yathin Kumar'],['skills','List all skills'],['projects','List projects'],['contact','Contact info'],['education','Education details'],['goals','2026 roadmap'],['jarvis','JARVIS AI info'],['clear','Clear terminal']];
+function termLine(html){const body=document.getElementById('termBody'),d=document.createElement('div');d.className='term-line';d.innerHTML=html;body.appendChild(d);body.scrollTop=body.scrollHeight;}
+function termBoot(){const body=document.getElementById('termBody');body.innerHTML='';termLine('<span class="tl-acc">JARVIS Terminal v1.0 — A Yathin Kumar</span>');termLine('<span class="tl-dim">Initialising systems...</span>');termLine('<span class="tl-ok">[ OK ]</span> AI core loaded');termLine('<span class="tl-ok">[ OK ]</span> Voice systems online');termLine('<span class="tl-ok">[ OK ]</span> Portfolio modules active');termLine('<span class="tl-dim">Type \'help\' to see available commands.</span>');termLine('&nbsp;');}
+function initTerminal(){
+  if(termBooted)return;termBooted=true;termBoot();
+  const input=document.getElementById('termIn');
+  input.addEventListener('keydown',e=>{if(e.key==='Enter'){const val=input.value;input.value='';runTermCmd(val);}});
 }
-function termBoot() {
-  const body = document.getElementById('termBody');
-  body.innerHTML = '';
-  termLine('<span class="tl-acc">JARVIS Terminal v1.0 — A Yathin Kumar</span>');
-  termLine('<span class="tl-dim">Initialising systems...</span>');
-  termLine('<span class="tl-ok">[ OK ]</span> AI core loaded');
-  termLine('<span class="tl-ok">[ OK ]</span> Voice systems online');
-  termLine('<span class="tl-ok">[ OK ]</span> Portfolio modules active');
-  termLine('<span class="tl-dim">Type \'help\' to see available commands.</span>');
-  termLine('&nbsp;');
-}
-function initTerminal() {
-  if (termBooted) return;
-  termBooted = true;
-  termBoot();
-  const input = document.getElementById('termIn');
-  input.addEventListener('keydown', e => {
-    if (e.key === 'Enter') { const val = input.value; input.value = ''; runTermCmd(val); }
-  });
-}
-function runTermCmd(raw) {
-  const cmd = raw.trim().toLowerCase();
-  termLine(`<span class="tl-dim">yathin@jarvis:~$</span> <span class="tl-cmd">${raw.replace(/</g,'&lt;') || '&nbsp;'}</span>`);
-  if (!cmd) return;
-  switch (cmd) {
-    case 'help': termLine('<span class="tl-acc">Available commands:</span>'); TERM_HELP.forEach(([c,d]) => termLine(`${c} → ${d}`)); break;
-    case 'about': termLine('A Yathin Kumar — First-year B.Tech CSC (AI-ML) student at VIT Chennai.'); termLine('Building JARVIS AI Assistant — Voice · NLP · GUI.'); break;
-    case 'skills': termLine('<span class="tl-acc">Proficient:</span> Python, SQL, Voice AI, tkinter, Git'); termLine('<span class="tl-warn">Learning:</span> TensorFlow, OpenCV, FastAPI, HTML/CSS, React'); termLine('<span class="tl-err">Horizon:</span> Transformers, LangChain, PyTorch, Cloud'); break;
-    case 'projects': termLine('<span class="tl-acc">001</span> JARVIS AI Model'); termLine('<span class="tl-acc">002</span> Voice Recognition Engine'); termLine('<span class="tl-acc">003</span> Text-to-Speech Module'); termLine('<span class="tl-acc">004</span> AI Dashboard GUI'); break;
-    case 'contact': termLine('Phone: +91 98425 28662'); termLine('Email: playingkinggame@gmail.com'); termLine('GitHub: github.com/playingkinggame'); break;
-    case 'education': termLine('2026–2030  B.Tech CSC (AI-ML), VIT Chennai'); termLine('2024–2026  Higher Secondary, Zion International'); termLine('2019–2024  Secondary, Zion International'); break;
-    case 'goals': termLine('<span class="tl-acc">2026:</span> Ship JARVIS v1, learn TensorFlow/OpenCV/FastAPI'); termLine('        Get comfortable with Linux CLI & Docker'); break;
-    case 'jarvis': termLine('<span class="tl-acc">JARVIS</span> — AI voice assistant. Wake-word, NLU, pyttsx3 TTS, live GUI.'); termLine('Repo: github.com/playingkinggame/deployjarvis'); break;
-    case 'clear': document.getElementById('termBody').innerHTML = ''; break;
-    case 'sudo': termLine('<span class="tl-err">Permission denied: nice try.</span>'); break;
-    default: termLine(`<span class="tl-err">command not found:</span> ${cmd} — type 'help'`);
+function runTermCmd(raw){
+  const cmd=raw.trim().toLowerCase();
+  termLine(`<span class="tl-dim">yathin@jarvis:~$</span> <span class="tl-cmd">${raw.replace(/</g,'&lt;')||'&nbsp;'}</span>`);
+  if(!cmd)return;
+  switch(cmd){
+    case 'help':termLine('<span class="tl-acc">Available commands:</span>');TERM_HELP.forEach(([c,d])=>termLine(`${c} → ${d}`));break;
+    case 'about':termLine('A Yathin Kumar — First-year B.Tech CSC (AI-ML) student at VIT Chennai.');termLine('Building JARVIS AI Assistant — Voice · NLP · GUI.');break;
+    case 'skills':termLine('<span class="tl-acc">Proficient:</span> Python, SQL, Voice AI, tkinter, Git');termLine('<span class="tl-warn">Learning:</span> TensorFlow, OpenCV, FastAPI, HTML/CSS, React');termLine('<span class="tl-err">Horizon:</span> Transformers, LangChain, PyTorch, Cloud');break;
+    case 'projects':termLine('<span class="tl-acc">001</span> JARVIS AI Model');termLine('<span class="tl-acc">002</span> Voice Recognition Engine');termLine('<span class="tl-acc">003</span> Text-to-Speech Module');termLine('<span class="tl-acc">004</span> AI Dashboard GUI');break;
+    case 'contact':termLine('Phone: +91 98425 28662');termLine('Email: playingkinggame@gmail.com');termLine('GitHub: github.com/playingkinggame');break;
+    case 'education':termLine('2026–2030  B.Tech CSC (AI-ML), VIT Chennai');termLine('2024–2026  Higher Secondary, Zion International');termLine('2019–2024  Secondary, Zion International');break;
+    case 'goals':termLine('<span class="tl-acc">2026:</span> Ship JARVIS v1, learn TensorFlow/OpenCV/FastAPI');termLine('        Get comfortable with Linux CLI & Docker');break;
+    case 'jarvis':termLine('<span class="tl-acc">JARVIS</span> — AI voice assistant. Wake-word, NLU, pyttsx3 TTS, live GUI.');termLine('Repo: github.com/playingkinggame/deployjarvis');break;
+    case 'clear':document.getElementById('termBody').innerHTML='';break;
+    case 'sudo':termLine('<span class="tl-err">Permission denied: nice try.</span>');break;
+    default:termLine(`<span class="tl-err">command not found:</span> ${cmd} — type 'help'`);
   }
 }
 </script>
