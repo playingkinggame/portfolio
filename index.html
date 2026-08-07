@@ -7,7 +7,6 @@
 <meta name="google-site-verification" content="7e6bLUQ3_vt8gHZfpadoBMbosEyqyerV8i8rWEHHHT4" />
 <meta name="description" content="A Yathin Kumar — AI/ML student at VIT Chennai, B.Tech CSC. Building JARVIS, a Python-based AI voice assistant with NLP, speech recognition, and text-to-speech.">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
-<script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
 /* ============================================================
    ROOT VARIABLES
@@ -562,38 +561,6 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
 #istclock { color: var(--a5); }
 
 /* ============================================================
-   AUTH / LOGIN + PROFILE EDIT
-============================================================ */
-.auth-box { display: flex; align-items: center; gap: .7rem; }
-#gsiBtn { display: flex; align-items: center; }
-.user-chip { display: none; align-items: center; gap: .6rem; padding: .35rem .8rem .35rem .4rem; border: 1px solid var(--border2); border-radius: 20px; background: rgba(0,229,200,.05); cursor: pointer; transition: border-color .2s, background .2s; }
-.user-chip:hover { border-color: var(--accent); background: rgba(0,229,200,.1); }
-.user-chip img { width: 26px; height: 26px; border-radius: 50%; display: block; border: 1px solid var(--border2); }
-.user-chip .uc-name { font-family: 'Space Mono', monospace; font-size: .72rem; letter-spacing: 1px; color: var(--text); max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.user-menu { display: none; position: absolute; top: 3.6rem; right: 2.8rem; z-index: 500; background: var(--panel); border: 1px solid var(--border2); border-radius: 4px; padding: .5rem; min-width: 180px; box-shadow: 0 20px 50px rgba(0,0,0,.5); }
-.user-menu.open { display: block; }
-.user-menu button { width: 100%; text-align: left; background: transparent; border: none; color: var(--text); font-family: 'Space Mono', monospace; font-size: .72rem; letter-spacing: 1.5px; text-transform: uppercase; padding: .65rem .8rem; border-radius: 2px; cursor: pointer; transition: background .2s, color .2s; }
-.user-menu button:hover { background: rgba(0,229,200,.08); color: var(--accent); }
-.modal-overlay { display: none; position: fixed; inset: 0; z-index: 900; background: rgba(2,4,12,.75); backdrop-filter: blur(6px); align-items: center; justify-content: center; padding: 1.5rem; }
-.modal-overlay.open { display: flex; }
-.modal-box { width: 100%; max-width: 440px; background: var(--panel); border: 1px solid var(--border2); border-radius: 6px; padding: 1.8rem; position: relative; box-shadow: 0 30px 80px rgba(0,0,0,.6); }
-.modal-close { position: absolute; top: 1rem; right: 1rem; background: transparent; border: none; color: var(--muted); font-size: 1.3rem; cursor: pointer; line-height: 1; }
-.modal-close:hover { color: var(--a3); }
-.modal-title { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 900; margin-bottom: .3rem; }
-.modal-title span { color: var(--accent); }
-.modal-sub { font-family: 'Space Mono', monospace; font-size: .65rem; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 1.4rem; }
-.modal-field { margin-bottom: 1rem; }
-.modal-field label { display: block; font-family: 'Space Mono', monospace; font-size: .62rem; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: .4rem; }
-.modal-field input, .modal-field textarea { width: 100%; background: rgba(255,255,255,.04); border: 1px solid var(--border); color: var(--text); font-family: 'Syne', sans-serif; font-size: .88rem; padding: .65rem .8rem; border-radius: 2px; outline: none; cursor: text; transition: border-color .2s; }
-.modal-field input:focus, .modal-field textarea:focus { border-color: var(--accent); }
-.modal-field textarea { resize: none; }
-.modal-actions { display: flex; gap: .6rem; margin-top: 1.3rem; }
-.modal-actions .btn { flex: 1; justify-content: center; }
-.auth-status { font-family: 'Space Mono', monospace; font-size: .6rem; letter-spacing: 1.5px; color: var(--muted); margin-top: .8rem; text-align: center; text-transform: uppercase; }
-.auth-status.err { color: var(--a3); }
-.auth-status.ok { color: var(--accent); }
-
-/* ============================================================
    MOBILE RESPONSIVE — TABLET (max 1024px)
 ============================================================ */
 @media (max-width: 1024px) {
@@ -631,8 +598,6 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
   #mobileNav { display: flex; }
   .nav-r .ns { display: none; }
   #clk { font-size: .65rem; }
-  .user-menu { right: 1.2rem; }
-  .user-chip .uc-name { max-width: 70px; }
 
   #t1 { grid-template-columns: 1fr; grid-template-rows: auto auto; height: auto; }
   .h-left { padding: 1.8rem 1.4rem 1.2rem 1.8rem; border-right: none; border-bottom: 1px solid var(--border); justify-content: flex-start; }
@@ -790,23 +755,11 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
   <div class="nav-r">
     <div id="clk"></div>
     <div class="ns"><span class="pd"></span>SYSTEM: ONLINE</div>
-    <div class="auth-box">
-      <div id="gsiBtn"></div>
-      <div class="user-chip" id="userChip" onclick="toggleUserMenu()">
-        <img id="ucAvatar" src="" alt="">
-        <span class="uc-name" id="ucName"></span>
-      </div>
-    </div>
     <button id="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
-
-<div class="user-menu" id="userMenu">
-  <button onclick="openProfileModal()">Edit Profile</button>
-  <button onclick="signOutUser()">Sign Out</button>
-</div>
 
 <div id="mobileNav">
   <button class="tb act" data-tab="1" onclick="swMobile('1')"><span class="tn">01.</span>Home</button>
@@ -963,8 +916,8 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
     <div class="biotitle fi"><span class="g">A YATHIN<br>KUMAR</span></div>
     <div class="biorole fi">B.Tech CSC (AI-ML) · VIT Chennai</div>
     <div class="biosec fi">About</div>
-    <p class="biotxt fi" id="bioAboutTxt1">Driven first-year CSC (AI-ML) student at VIT Chennai, proficient in Python, Java, and SQL. Passionate about building intelligent systems and exploring the intersection of code and cognition.</p>
-    <p class="biotxt fi" id="bioAboutTxt2">Self-motivated with a strong personal drive — currently building JARVIS as a solo initiative. Skilled at working independently and as part of a team.</p>
+    <p class="biotxt fi">Driven first-year CSC (AI-ML) student at VIT Chennai, proficient in Python, Java, and SQL. Passionate about building intelligent systems and exploring the intersection of code and cognition.</p>
+    <p class="biotxt fi">Self-motivated with a strong personal drive — currently building JARVIS as a solo initiative. Skilled at working independently and as part of a team.</p>
     <div class="biosec fi">Traits</div>
     <div class="traits">
       <div class="trait fi">Excellent verbal and written communication</div>
@@ -984,9 +937,9 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
     <div class="cr-title fi">GET IN<br>TOUCH</div>
     <div class="cr-sub fi">Open for collabs · AI projects · Conversations</div>
     <div class="ccs">
-      <div class="cc2 fi"><div class="cc2-icon">📞</div><div class="cc2-info"><span class="cc2-lbl">Phone</span><div class="cc2-val" id="ccPhoneVal">+91 98425 28662</div></div><div class="cc2-btns"><button class="cc2-btn" onclick="doCall()">Call</button><button class="cc2-btn" id="cp1" onclick="doCopy(document.getElementById('ccPhoneVal').textContent,'cp1','Phone copied!')">Copy</button></div></div>
-      <div class="cc2 fi"><div class="cc2-icon">✉️</div><div class="cc2-info"><span class="cc2-lbl">Email</span><div class="cc2-val" id="ccEmailVal">playingkinggame@gmail.com</div></div><div class="cc2-btns"><button class="cc2-btn" onclick="doMail()">Mail</button><button class="cc2-btn" id="cp2" onclick="doCopy(document.getElementById('ccEmailVal').textContent,'cp2','Email copied!')">Copy</button></div></div>
-      <div class="cc2 fi"><div class="cc2-icon">📍</div><div class="cc2-info"><span class="cc2-lbl">Location</span><div class="cc2-val" id="ccLocVal">Chennai, India</div></div><div class="cc2-btns"><button class="cc2-btn" onclick="doMaps()">Maps</button></div></div>
+      <div class="cc2 fi"><div class="cc2-icon">📞</div><div class="cc2-info"><span class="cc2-lbl">Phone</span><div class="cc2-val">+91 98425 28662</div></div><div class="cc2-btns"><button class="cc2-btn" onclick="doCall()">Call</button><button class="cc2-btn" id="cp1" onclick="doCopy('+919842528662','cp1','Phone copied!')">Copy</button></div></div>
+      <div class="cc2 fi"><div class="cc2-icon">✉️</div><div class="cc2-info"><span class="cc2-lbl">Email</span><div class="cc2-val">playingkinggame@gmail.com</div></div><div class="cc2-btns"><button class="cc2-btn" onclick="doMail()">Mail</button><button class="cc2-btn" id="cp2" onclick="doCopy('playingkinggame@gmail.com','cp2','Email copied!')">Copy</button></div></div>
+      <div class="cc2 fi"><div class="cc2-icon">📍</div><div class="cc2-info"><span class="cc2-lbl">Location</span><div class="cc2-val">Chennai, India</div></div><div class="cc2-btns"><button class="cc2-btn" onclick="doMaps()">Maps</button></div></div>
     </div>
     <div class="qm fi">
       <div class="qm-t">Quick Message</div>
@@ -1054,48 +1007,7 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
 </footer>
 </div>
 
-<!-- PROFILE EDIT MODAL -->
-<div class="modal-overlay" id="profileModalOverlay">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeProfileModal()">×</button>
-    <div class="modal-title">EDIT <span>PROFILE</span></div>
-    <div class="modal-sub">Synced to your Google account</div>
-    <div class="modal-field">
-      <label>Display Name</label>
-      <input type="text" id="pfName" placeholder="Your name">
-    </div>
-    <div class="modal-field">
-      <label>Phone</label>
-      <input type="text" id="pfPhone" placeholder="+91 ...">
-    </div>
-    <div class="modal-field">
-      <label>Location</label>
-      <input type="text" id="pfLocation" placeholder="City, Country">
-    </div>
-    <div class="modal-field">
-      <label>Bio</label>
-      <textarea id="pfBio" rows="3" placeholder="A short bio..."></textarea>
-    </div>
-    <div class="modal-actions">
-      <button class="btn bo" onclick="closeProfileModal()">Cancel</button>
-      <button class="btn bc" id="pfSaveBtn" onclick="saveProfile()">Save Changes</button>
-    </div>
-    <div class="auth-status" id="pfStatus"></div>
-  </div>
-</div>
-
 <script>
-/* ============================================================
-   BACKEND API BASE
-   Point this at your running backend (see /server in the project).
-   Defaults to localhost:4000 for local dev.
-============================================================ */
-const API_BASE = window.PORTFOLIO_API_BASE || 'http://localhost:4000';
-const GOOGLE_CLIENT_ID = '931924114057-4stms2qs60o6e7lj9d512tqvoqmioh56.apps.googleusercontent.com';
-
-let authToken = null;
-let currentUser = null;
-
 /* SPLASH 3D CANVAS */
 (function() {
   const canvas = document.getElementById('splashCanvas');
@@ -1288,14 +1200,14 @@ async function doCopy(text,bid,msg){
   btn.textContent='✓';btn.classList.add('done');toast(msg);
   setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('done');},2500);
 }
-function doCall(){toast('Opening phone dialer...');setTimeout(()=>{location.href='tel:'+document.getElementById('ccPhoneVal').textContent.replace(/[^+0-9]/g,'');},400);}
-function doMail(){toast('Opening mail...');setTimeout(()=>{location.href='mailto:'+document.getElementById('ccEmailVal').textContent;},400);}
-function doMaps(){toast('Opening maps...');setTimeout(()=>{window.open('https://maps.google.com/?q='+encodeURIComponent(document.getElementById('ccLocVal').textContent),'_blank');},400);}
+function doCall(){toast('Opening phone dialer...');setTimeout(()=>{location.href='tel:+919842528662';},400);}
+function doMail(){toast('Opening mail...');setTimeout(()=>{location.href='mailto:playingkinggame@gmail.com';},400);}
+function doMaps(){toast('Opening maps...');setTimeout(()=>{window.open('https://maps.google.com/?q=Chennai,India','_blank');},400);}
 function sendQM(){
   const s=document.getElementById('qs').value.trim()||'Hello Yathin!',b=document.getElementById('qb').value.trim();
   if(!b){toast('Please type a message.');return;}
   toast('Opening mail app...');
-  setTimeout(()=>{location.href=`mailto:${document.getElementById('ccEmailVal').textContent}?subject=${encodeURIComponent(s)}&body=${encodeURIComponent(b)}`;},400);
+  setTimeout(()=>{location.href=`mailto:playingkinggame@gmail.com?subject=${encodeURIComponent(s)}&body=${encodeURIComponent(b)}`;},400);
 }
 function downloadResume(){toast('Resume feature — add your PDF link here.');}
 
@@ -1325,7 +1237,7 @@ function runTermCmd(raw){
     case 'about':termLine('A Yathin Kumar — First-year B.Tech CSC (AI-ML) student at VIT Chennai.');termLine('Building JARVIS AI Assistant — Voice · NLP · GUI.');break;
     case 'skills':termLine('<span class="tl-acc">Proficient:</span> Python, SQL, Voice AI, tkinter, Git');termLine('<span class="tl-warn">Learning:</span> TensorFlow, OpenCV, FastAPI, HTML/CSS, React');termLine('<span class="tl-err">Horizon:</span> Transformers, LangChain, PyTorch, Cloud');break;
     case 'projects':termLine('<span class="tl-acc">001</span> JARVIS AI Model');termLine('<span class="tl-acc">002</span> Voice Recognition Engine');termLine('<span class="tl-acc">003</span> Text-to-Speech Module');termLine('<span class="tl-acc">004</span> AI Dashboard GUI');break;
-    case 'contact':termLine('Phone: '+document.getElementById('ccPhoneVal').textContent);termLine('Email: '+document.getElementById('ccEmailVal').textContent);termLine('GitHub: github.com/playingkinggame');break;
+    case 'contact':termLine('Phone: +91 98425 28662');termLine('Email: playingkinggame@gmail.com');termLine('GitHub: github.com/playingkinggame');break;
     case 'education':termLine('2026–2030  B.Tech CSC (AI-ML), VIT Chennai');termLine('2024–2026  Higher Secondary, Zion International');termLine('2019–2024  Secondary, Zion International');break;
     case 'goals':termLine('<span class="tl-acc">2026:</span> Ship JARVIS v1, learn TensorFlow/OpenCV/FastAPI');termLine('        Get comfortable with Linux CLI & Docker');break;
     case 'jarvis':termLine('<span class="tl-acc">JARVIS</span> — AI voice assistant. Wake-word, NLU, pyttsx3 TTS, live GUI.');termLine('Repo: github.com/playingkinggame/deployjarvis');break;
@@ -1334,133 +1246,6 @@ function runTermCmd(raw){
     default:termLine(`<span class="tl-err">command not found:</span> ${cmd} — type 'help'`);
   }
 }
-
-/* ============================================================
-   GOOGLE SIGN-IN + PROFILE (backend-connected)
-============================================================ */
-function initGoogleSignIn(){
-  if(!window.google || !google.accounts || !google.accounts.id) { setTimeout(initGoogleSignIn, 300); return; }
-  google.accounts.id.initialize({
-    client_id: GOOGLE_CLIENT_ID,
-    callback: handleCredentialResponse,
-    auto_select: false
-  });
-  google.accounts.id.renderButton(
-    document.getElementById('gsiBtn'),
-    { theme: 'filled_black', size: 'medium', shape: 'pill', text: 'signin', type: 'standard' }
-  );
-  // Restore session if we have one saved
-  const saved = sessionStorage.getItem('yk_auth');
-  if (saved) {
-    try {
-      const parsed = JSON.parse(saved);
-      authToken = parsed.token;
-      applyUser(parsed.user);
-    } catch(e) { sessionStorage.removeItem('yk_auth'); }
-  }
-}
-
-async function handleCredentialResponse(response){
-  try {
-    const res = await fetch(`${API_BASE}/api/auth/google`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ credential: response.credential })
-    });
-    if (!res.ok) throw new Error('Sign-in failed');
-    const data = await res.json();
-    authToken = data.token;
-    applyUser(data.user);
-    sessionStorage.setItem('yk_auth', JSON.stringify({ token: authToken, user: data.user }));
-    toast('Signed in as ' + (data.user.name || data.user.email));
-  } catch(err) {
-    console.error(err);
-    toast('Sign-in failed — is the backend running?');
-  }
-}
-
-function applyUser(user){
-  currentUser = user;
-  document.getElementById('gsiBtn').style.display = 'none';
-  const chip = document.getElementById('userChip');
-  chip.style.display = 'flex';
-  document.getElementById('ucAvatar').src = user.picture || '';
-  document.getElementById('ucName').textContent = user.name || user.email;
-  // Reflect profile onto the Bio tab contact card
-  if (user.phone) document.getElementById('ccPhoneVal').textContent = user.phone;
-  if (user.location) document.getElementById('ccLocVal').textContent = user.location;
-  document.getElementById('ccEmailVal').textContent = user.email;
-}
-
-function toggleUserMenu(){
-  document.getElementById('userMenu').classList.toggle('open');
-}
-document.addEventListener('click', (e) => {
-  const menu = document.getElementById('userMenu');
-  const chip = document.getElementById('userChip');
-  if (menu.classList.contains('open') && !menu.contains(e.target) && !chip.contains(e.target)) {
-    menu.classList.remove('open');
-  }
-});
-
-function signOutUser(){
-  authToken = null; currentUser = null;
-  sessionStorage.removeItem('yk_auth');
-  document.getElementById('userMenu').classList.remove('open');
-  document.getElementById('userChip').style.display = 'none';
-  document.getElementById('gsiBtn').style.display = 'flex';
-  if (window.google && google.accounts && google.accounts.id) google.accounts.id.disableAutoSelect();
-  toast('Signed out');
-}
-
-function openProfileModal(){
-  if (!currentUser) { toast('Sign in first'); return; }
-  document.getElementById('userMenu').classList.remove('open');
-  document.getElementById('pfName').value = currentUser.name || '';
-  document.getElementById('pfPhone').value = currentUser.phone || '';
-  document.getElementById('pfLocation').value = currentUser.location || '';
-  document.getElementById('pfBio').value = currentUser.bio || '';
-  document.getElementById('pfStatus').textContent = '';
-  document.getElementById('pfStatus').className = 'auth-status';
-  document.getElementById('profileModalOverlay').classList.add('open');
-}
-function closeProfileModal(){
-  document.getElementById('profileModalOverlay').classList.remove('open');
-}
-document.getElementById('profileModalOverlay').addEventListener('click', (e)=>{
-  if (e.target.id === 'profileModalOverlay') closeProfileModal();
-});
-
-async function saveProfile(){
-  if (!authToken) { toast('Sign in first'); return; }
-  const body = {
-    name: document.getElementById('pfName').value.trim(),
-    phone: document.getElementById('pfPhone').value.trim(),
-    location: document.getElementById('pfLocation').value.trim(),
-    bio: document.getElementById('pfBio').value.trim()
-  };
-  const statusEl = document.getElementById('pfStatus');
-  statusEl.textContent = 'Saving...'; statusEl.className = 'auth-status';
-  try {
-    const res = await fetch(`${API_BASE}/api/profile`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken },
-      body: JSON.stringify(body)
-    });
-    if (!res.ok) throw new Error('Save failed');
-    const data = await res.json();
-    applyUser(data.user);
-    sessionStorage.setItem('yk_auth', JSON.stringify({ token: authToken, user: data.user }));
-    statusEl.textContent = 'Saved ✓'; statusEl.className = 'auth-status ok';
-    toast('Profile updated');
-    setTimeout(closeProfileModal, 700);
-  } catch(err) {
-    console.error(err);
-    statusEl.textContent = 'Could not save — check backend connection'; statusEl.className = 'auth-status err';
-  }
-}
-
-initGoogleSignIn();
 </script>
 </body>
 </html>
