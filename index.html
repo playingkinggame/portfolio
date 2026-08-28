@@ -613,8 +613,9 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
    MOBILE RESPONSIVE — MOBILE (max 768px)
 ============================================================ */
 @media (max-width: 768px) {
-  body { overflow: auto; height: auto; cursor: auto; }
-  #app { position: relative; height: auto; overflow: auto; }
+  html, body { height: auto; }
+  body { overflow: auto; height: auto; cursor: auto; -webkit-overflow-scrolling: touch; }
+  #app { position: relative; height: auto; overflow: visible; }
   #panels { overflow: visible; position: relative; height: auto; }
   .panel { position: relative; inset: auto; opacity: 1; pointer-events: all; transform: none; transition: none; display: none; overflow: visible; height: auto; }
   .panel.act { display: flex; flex-direction: column; }
@@ -919,7 +920,11 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
       <div class="skrow"><span class="sklbl">Java</span><div class="sktrack"><div class="skfill" style="width:45%;animation-delay:.1s"></div></div><span class="skpct p">45%</span></div>
       <div class="skrow"><span class="sklbl">SQL</span><div class="sktrack"><div class="skfill" style="width:70%;animation-delay:.2s"></div></div><span class="skpct p">70%</span></div>
       <div class="skrow"><span class="sklbl">C <span class="lbadge">Learning</span></span><div class="sktrack"><div class="skfill l" style="width:30%;animation-delay:.3s"></div></div><span class="skpct l">30%</span></div>
-      <div class="skrow"><span class="sklbl">HTML/CSS <span class="lbadge">Learning</span></span><div class="sktrack"><div class="skfill l" style="width:25%;animation-delay:.4s"></div></div><span class="skpct l">25%</span></div>
+    </div></div>
+    <div class="skcat fi"><div class="skcat-t">Web Development</div><div class="skbars">
+      <div class="skrow"><span class="sklbl">HTML / CSS</span><div class="sktrack"><div class="skfill" style="width:72%"></div></div><span class="skpct p">72%</span></div>
+      <div class="skrow"><span class="sklbl">JavaScript</span><div class="sktrack"><div class="skfill" style="width:65%;animation-delay:.1s"></div></div><span class="skpct p">65%</span></div>
+      <div class="skrow"><span class="sklbl">React</span><div class="sktrack"><div class="skfill" style="width:58%;animation-delay:.2s"></div></div><span class="skpct p">58%</span></div>
     </div></div>
     <div class="skcat fi"><div class="skcat-t">AI / ML Tools</div><div class="skbars">
       <div class="skrow"><span class="sklbl">Voice AI</span><div class="sktrack"><div class="skfill" style="width:68%"></div></div><span class="skpct p">68%</span></div>
@@ -937,8 +942,8 @@ body.hov .cur-ring { width: 50px; height: 50px; border-color: rgba(240,67,108,.4
   </div>
   <div class="sk-r">
     <div><div class="sec-lbl fi">Roadmap</div><div class="sec-h fi">IN <span>PROGRESS</span></div></div>
-    <div class="fi"><div class="skcat-t" style="font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:3px;color:var(--accent);text-transform:uppercase;margin-bottom:.55rem">✓ Proficient Now</div><div class="pill-grid"><span class="pill p">Python</span><span class="pill p">SQL</span><span class="pill p">Voice AI</span><span class="pill p">pyttsx3</span><span class="pill p">SpeechRecognition</span><span class="pill p">tkinter</span><span class="pill p">Git</span><span class="pill p">DSA Basics</span><span class="pill p">DBMS</span></div></div>
-    <div class="fi"><div class="skcat-t" style="font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:3px;color:var(--a4);text-transform:uppercase;margin-bottom:.55rem">⬤ Currently Learning</div><div class="pill-grid"><span class="pill l">TensorFlow</span><span class="pill l">OpenCV</span><span class="pill l">FastAPI</span><span class="pill l">HTML / CSS</span><span class="pill l">React</span><span class="pill l">Linux CLI</span><span class="pill l">Docker</span><span class="pill l">C Language</span></div></div>
+    <div class="fi"><div class="skcat-t" style="font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:3px;color:var(--accent);text-transform:uppercase;margin-bottom:.55rem">✓ Proficient Now</div><div class="pill-grid"><span class="pill p">Python</span><span class="pill p">SQL</span><span class="pill p">Voice AI</span><span class="pill p">pyttsx3</span><span class="pill p">SpeechRecognition</span><span class="pill p">tkinter</span><span class="pill p">Git</span><span class="pill p">DSA Basics</span><span class="pill p">DBMS</span><span class="pill p">HTML / CSS</span><span class="pill p">JavaScript</span><span class="pill p">React</span></div></div>
+    <div class="fi"><div class="skcat-t" style="font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:3px;color:var(--a4);text-transform:uppercase;margin-bottom:.55rem">⬤ Currently Learning</div><div class="pill-grid"><span class="pill l">TensorFlow</span><span class="pill l">OpenCV</span><span class="pill l">FastAPI</span><span class="pill l">Linux CLI</span><span class="pill l">Docker</span><span class="pill l">C Language</span></div></div>
     <div class="fi"><div class="skcat-t" style="font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:3px;color:var(--a3);text-transform:uppercase;margin-bottom:.55rem">◎ On The Horizon</div><div class="pill-grid"><span class="pill s">Transformers</span><span class="pill s">LangChain</span><span class="pill s">Kubernetes</span><span class="pill s">Cloud (AWS)</span><span class="pill s">PyTorch</span><span class="pill s">MLOps</span></div></div>
     <div class="sec-lbl fi" style="margin-top:.3rem">Education Timeline</div>
     <div class="tl2 fi">
@@ -1235,7 +1240,13 @@ function swMobile(id){
 function sw(id){
   document.querySelectorAll('.tb').forEach(b=>b.classList.toggle('act',b.dataset.tab===id));
   document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('act',p.id==='t'+id));
-  if(window.innerWidth<=768) window.scrollTo({top:0,behavior:'smooth'});
+  if(window.innerWidth<=768){
+    requestAnimationFrame(()=>{
+      requestAnimationFrame(()=>{
+        window.scrollTo({top:0,left:0,behavior:'smooth'});
+      });
+    });
+  }
   if(id==='2') rproj('jarvis');
   if(id==='6'){initTerminal();setTimeout(()=>document.getElementById('termIn').focus(),150);}
 }
@@ -1324,7 +1335,7 @@ function runTermCmd(raw){
   switch(cmd){
     case 'help':termLine('<span class="tl-acc">Available commands:</span>');TERM_HELP.forEach(([c,d])=>termLine(`${c} → ${d}`));break;
     case 'about':termLine('A Yathin Kumar — First-year B.Tech CSC (AI-ML) student at VIT Chennai.');termLine('Building JARVIS AI Assistant — Voice · NLP · GUI.');break;
-    case 'skills':termLine('<span class="tl-acc">Proficient:</span> Python, SQL, Voice AI, tkinter, Git');termLine('<span class="tl-warn">Learning:</span> TensorFlow, OpenCV, FastAPI, HTML/CSS, React');termLine('<span class="tl-err">Horizon:</span> Transformers, LangChain, PyTorch, Cloud');break;
+    case 'skills':termLine('<span class="tl-acc">Proficient:</span> Python, SQL, Voice AI, tkinter, Git, HTML/CSS, JavaScript, React');termLine('<span class="tl-warn">Learning:</span> TensorFlow, OpenCV, FastAPI, Linux CLI, Docker, C');termLine('<span class="tl-err">Horizon:</span> Transformers, LangChain, PyTorch, Cloud');break;
     case 'projects':termLine('<span class="tl-acc">001</span> JARVIS AI Model');termLine('<span class="tl-acc">002</span> Voice Recognition Engine');termLine('<span class="tl-acc">003</span> Text-to-Speech Module');termLine('<span class="tl-acc">004</span> AI Dashboard GUI');break;
     case 'contact':termLine('Phone: '+document.getElementById('ccPhoneVal').textContent);termLine('Email: '+document.getElementById('ccEmailVal').textContent);termLine('GitHub: github.com/playingkinggame');break;
     case 'education':termLine('2026–2030  B.Tech CSC (AI-ML), VIT Chennai');termLine('2024–2026  Higher Secondary, Zion International');termLine('2019–2024  Secondary, Zion International');break;
