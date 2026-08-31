@@ -1,0 +1,38 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ykGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5c8"/>
+      <stop offset="100%" stop-color="#7c5cfc"/>
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="4.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="dotGlow" x="-200%" y="-200%" width="500%" height="500%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- background badge -->
+  <rect x="4" y="4" width="192" height="192" rx="28" fill="#060a16"/>
+  <rect x="4" y="4" width="192" height="192" rx="28" fill="none" stroke="url(#ykGrad)" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- thin corner accents, echoing the site's splash-corner motif -->
+  <path d="M22 46 V26 H42" fill="none" stroke="#00e5c8" stroke-width="2" opacity="0.35"/>
+  <path d="M178 154 V174 H158" fill="none" stroke="#7c5cfc" stroke-width="2" opacity="0.35"/>
+
+  <!-- YK monogram -->
+  <g filter="url(#glow)">
+    <text x="70" y="128" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="88" letter-spacing="-2" fill="url(#ykGrad)">YK</text>
+  </g>
+
+  <!-- node dot, matching the nav-brand "." + blinking dot pairing -->
+  <circle cx="150" cy="100" r="7" fill="#7c5cfc" filter="url(#dotGlow)"/>
+</svg>
